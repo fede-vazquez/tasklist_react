@@ -1,9 +1,11 @@
 import SelectMonth from "./SelectMonth";
+import SelectedDate from "./SelectedDate";
 
 function MainTaskList() {
   return (
     <div>
-      <SelectMonth />
+      <SelectMonth actualMonth="Mes actual" />
+      <SelectedDate dateSelected="Fecha seleccionada" />
     </div>
   );
 }

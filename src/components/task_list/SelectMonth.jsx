@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function SelectMonth() {
-  const [selectedMonth, setSelectedMonth] = useState("este mes");
+function SelectMonth({ actualMonth }) {
+  const [selectedMonth, setSelectedMonth] = useState(actualMonth);
 
   const monthList = [
     { monthNumber: 1, name: "Enero" },
@@ -39,7 +39,7 @@ function SelectMonth() {
           {selectedMonth}
           <i class="fa-solid fa-caret-down ps-1 text-white"></i>
         </button>
-        <ul className="dropdown-menu p-0 bg-transparent bg-1">
+        <ul className="dropdown-menu p-0 bg-1">
           {monthList.map((month) => {
             return (
               <li
