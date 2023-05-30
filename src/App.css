@@ -1,3 +1,26 @@
+/* general */
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* add font-size */
+
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+/* backgrounds */
 .bg-1 {
   background-color: #262626;
+}
+
+.bg-2 {
+  background-color: #373737;
 }
