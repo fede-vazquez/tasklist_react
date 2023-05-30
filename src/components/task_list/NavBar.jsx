@@ -20,7 +20,7 @@ function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">{/* Proximamente irán opciones. */}</ul>
+          <ul className="navbar-nav">{/* Próximamente irán opciones. */}</ul>
         </div>
       </div>
     </nav>
