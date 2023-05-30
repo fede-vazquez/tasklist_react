@@ -37,7 +37,7 @@ function SelectMonth({ actualMonth }) {
           aria-expanded="false"
         >
           {selectedMonth}
-          <i class="fa-solid fa-caret-down ps-1 text-white"></i>
+          <i className="fa-solid fa-caret-down ps-1 text-white"></i>
         </button>
         <ul className="dropdown-menu p-0 bg-1">
           {monthList.map((month) => {
