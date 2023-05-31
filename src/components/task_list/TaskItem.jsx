@@ -1,5 +1,5 @@
 import React from "react";
-import TaskRepeatInfo from "./taskRepeatInfo";
+import TaskRepeatInfo from "./TaskRepeatInfo";
 
 function TaskItem({ task }) {
   // Maqueta para las tareas, luego será dinámico.

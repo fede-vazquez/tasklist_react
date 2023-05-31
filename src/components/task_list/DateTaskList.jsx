@@ -5,25 +5,17 @@ function DateTaskList({ date }) {
   // Maqueta de como se verán las tareas en el local storage.
   const tasks = [
     {
-      repeatDays: [
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo",
-      ],
+      repeatDays: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
       dateRepeat: null,
-      name: "Tomar agua",
-      hour: "10:00AM",
-      genre: "personal",
+      name: "Ir a trabajar",
+      hour: "9:00AM",
+      genre: "trabajo",
     },
     {
       repeatDays: ["no repeat"],
       dateRepeat: null,
       name: "Cumpleaños de alguien",
-      hour: "12:00AM",
+      hour: "todo el día",
       genre: "personal",
     },
     {
