@@ -27,7 +27,7 @@ function TaskRepeatInfo({ daysRepeat }) {
         weekDays.map((day, i) => {
           return (
             <li
-              key={day.day + i}
+              key={day + i}
               className={
                 (daysRepeat.includes(day) ? "" : "text-secondary") + " fw-bold"
               }
