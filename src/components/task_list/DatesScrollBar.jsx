@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 dayjs.locale("es");
 
+import DateInScrollBar from "./DateInScrollBar";
+
 function DatesScrollBar({ selectedMonth }) {
   // Saca el més actual
   const month = dayjs().month();
@@ -30,15 +32,8 @@ function DatesScrollBar({ selectedMonth }) {
       <ul className="d-flex">
         {dates.map((date, i) => {
           return (
-            <li
-              key={date + i}
-              className="mx-2 text-center bg-2 px-2 py-1 rounded"
-            >
-              <div>
-                <p>1</p>
-                <p>20</p>
-                <p>check</p>
-              </div>
+            <li key={date.format("dddd") + i}>
+              <DateInScrollBar date={date} />
             </li>
           );
         })}
