@@ -18,10 +18,6 @@ function SelectMonth({ actualMonth }) {
     { monthNumber: 12, name: "Diciembre" },
   ];
 
-  const deleteMonthSelected = (monthSelected) => {
-    console.log(monthSelected);
-  };
-
   const selectMonth = (e) => {
     setSelectedMonth(e.target.innerText);
   };
