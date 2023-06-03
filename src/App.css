@@ -24,3 +24,19 @@ p {
 .bg-2 {
   background-color: #373737;
 }
+
+/* Task List */
+
+.date-list-container {
+  height: 6rem;
+}
+
+.date-list-item {
+  height: 70%;
+  transition-duration: 1s;
+}
+
+.active-date-item {
+  height: 100%;
+  background-color: #373737;
+}

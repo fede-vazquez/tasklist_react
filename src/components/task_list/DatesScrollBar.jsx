@@ -1,10 +1,9 @@
 import React from "react";
+import DateInScrollBar from "./DateInScrollBar";
 
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 dayjs.locale("es");
-
-import DateInScrollBar from "./DateInScrollBar";
 
 function DatesScrollBar({ selectedMonth }) {
   // Saca el més actual
@@ -28,11 +27,14 @@ function DatesScrollBar({ selectedMonth }) {
   }
 
   return (
-    <div className="overflow-x-auto text-white px-2">
-      <ul className="d-flex">
+    <div className="text-white px-2 overflow-x-auto">
+      <ul className="date-list-container d-flex align-items-end">
         {dates.map((date, i) => {
           return (
-            <li key={date.format("dddd") + i}>
+            <li
+              className="date-list-item rounded-3"
+              key={date.format("dddd") + i}
+            >
               <DateInScrollBar date={date} />
             </li>
           );
