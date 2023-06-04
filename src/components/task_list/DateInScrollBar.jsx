@@ -21,7 +21,7 @@ function DateInScrollBar({ date }) {
         <p className="fs-4">{dateNumber}</p>
         {/* proximo icono que mostrará si un día
         tiene tareas para hacer */}
-        <i className="fa-solid fa-circle-check fs-6 pb-1"></i>
+        <i className="fa-solid fa-circle-check fs-6"></i>
       </div>
       <div
         onClick={centerItemInMiddle}

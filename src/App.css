@@ -33,6 +33,7 @@ p {
 
 .date-list-item {
   height: 70%;
+  min-width: 4.5rem;
   transition-duration: 1s;
 }
 
