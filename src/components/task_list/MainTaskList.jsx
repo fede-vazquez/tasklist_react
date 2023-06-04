@@ -11,11 +11,26 @@ function MainTaskList() {
   const monthCapitalized =
     date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
 
+  function newDate(newDateSelected) {
+    setDate(newDateSelected);
+  }
+
   return (
     <div>
-      <SelectMonth actualMonth={monthCapitalized} />
-      <DatesScrollBar />
-      <SelectedDate dateSelected="Fecha seleccionada" />
+      <SelectMonth
+        key={"SelectedMonth" + date.valueOf()}
+        selectedMonth={monthCapitalized}
+        newDate={newDate}
+      />
+
+      <DatesScrollBar
+        key={"DatesScrollBar" + date.valueOf()}
+        selectedMonth={date.month()}
+        newDate={newDate}
+      />
+
+      <SelectedDate key={"SelectedDate" + date.valueOf()} dateSelected={date} />
+
       <DateTaskList date="Fecha seleccionada" />
     </div>
   );

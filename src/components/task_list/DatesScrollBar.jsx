@@ -6,12 +6,9 @@ import "dayjs/locale/es";
 dayjs.locale("es");
 
 function DatesScrollBar({ selectedMonth }) {
-  // Saca el més actual
-  const month = dayjs().month();
-
   // Saca el primer y ultimo día del més actual
-  const startMonth = dayjs().month(month).startOf("month");
-  const endMonth = dayjs().month(month).endOf("month");
+  const startMonth = dayjs().month(selectedMonth).startOf("month");
+  const endMonth = dayjs().month(selectedMonth).endOf("month");
 
   // Variable que irá cambiando, con el valor inicial del més actual
   let oneDay = startMonth;

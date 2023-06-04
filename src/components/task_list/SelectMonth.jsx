@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
-function SelectMonth({ actualMonth }) {
-  const [selectedMonth, setSelectedMonth] = useState(actualMonth);
-
+function SelectMonth({ selectedMonth, newDate }) {
   const monthList = [
     { monthNumber: 1, name: "Enero" },
     { monthNumber: 2, name: "Febrero" },
@@ -19,8 +18,20 @@ function SelectMonth({ actualMonth }) {
   ];
 
   const selectMonth = (e) => {
-    setSelectedMonth(e.target.innerText);
+    const selectedMonthObjet = monthList.find(
+      (month) => month.name == e.target.innerText
+    );
+
+    const newDateSelected = dayjs()
+      .month(selectedMonthObjet.monthNumber - 1)
+      .set("date", 1);
+
+    newDate(newDateSelected);
   };
+
+  function dateNow() {
+    newDate(dayjs());
+  }
 
   return (
     <section className="d-flex justify-content-between ">
@@ -53,6 +64,7 @@ function SelectMonth({ actualMonth }) {
       </div>
       {/* botón para llevar al día actual */}
       <button
+        onClick={dateNow}
         className="btn btn-secondary bg-transparent border-0"
         type="button"
         aria-expanded="false"
