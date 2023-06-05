@@ -28,6 +28,7 @@ function MainTaskList() {
       <DatesScrollBar
         key={"DatesScrollBar" + dateFormat}
         selectedMonth={date.month()}
+        dateSelected={date}
         newDate={newDate}
       />
 

@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 dayjs.locale("es");
 
-function DatesScrollBar({ selectedMonth }) {
+function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
   // Saca el primer y ultimo día del més actual
   const startMonth = dayjs().month(selectedMonth).startOf("month");
   const endMonth = dayjs().month(selectedMonth).endOf("month");
@@ -29,7 +29,8 @@ function DatesScrollBar({ selectedMonth }) {
         {dates.map((date, i) => {
           return (
             <li
-              className="date-list-item rounded-3"
+              className={`rounded-3 date-list-item 
+              ${dateSelected.date() === date.date() ? "active-date-item" : ""}`}
               key={date.format("dddd") + i}
             >
               <DateInScrollBar date={date} />
