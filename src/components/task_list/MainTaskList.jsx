@@ -13,8 +13,12 @@ function MainTaskList() {
     date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
 
   function newDate(newDateSelected) {
-    setDate(newDateSelected);
-    console.log(newDateSelected.format("DD/MM/YYYY"));
+    const newDateFormat = newDateSelected.format("DD/MM/YYYY");
+
+    if (newDateFormat != dateFormat) {
+      setDate(newDateSelected);
+      console.log(dateFormat);
+    }
   }
 
   return (

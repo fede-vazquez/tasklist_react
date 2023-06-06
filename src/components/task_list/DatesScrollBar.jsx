@@ -23,6 +23,10 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
     oneDay = oneDay.add(1, "day");
   }
 
+  function selectNewDate(newDateSelected) {
+    newDate(newDateSelected);
+  }
+
   return (
     <div className="text-white px-2 overflow-x-auto">
       <ul className="date-list-container d-flex align-items-end">
@@ -33,7 +37,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
               ${dateSelected.date() === date.date() ? "active-date-item" : ""}`}
               key={date.format("dddd") + i}
             >
-              <DateInScrollBar date={date} />
+              <DateInScrollBar date={date} newDate={selectNewDate} />
             </li>
           );
         })}

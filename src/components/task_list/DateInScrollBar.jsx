@@ -1,17 +1,15 @@
 import React from "react";
 
-function DateInScrollBar({ date }) {
+function DateInScrollBar({ date, newDate }) {
   const dateAbbreviation = date.format("ddd");
   const dateNumber = date.format("D");
+  function selectItem(itemSelected) {
+    // Agrega la clase para "activar" uno de los items
+    // y elimina las clase de los demás.
+    activeItem(itemSelected);
 
-  function centerItemInMiddle(itemSelected) {
-    document.querySelectorAll(".date-list-item").forEach((item) => {
-      if (item.classList.contains("active-date-item")) {
-        item.classList.remove("active-date-item");
-      }
-    });
-
-    itemSelected.target.parentNode.parentNode.classList.add("active-date-item");
+    // Cambia la fecha que se usa en los componentes.
+    newDate(date.date(dateNumber));
   }
 
   return (
@@ -24,11 +22,21 @@ function DateInScrollBar({ date }) {
         <i className="fa-solid fa-circle-check fs-6"></i>
       </div>
       <div
-        onClick={centerItemInMiddle}
+        onClick={selectItem}
         className="position-absolute w-100 h-100 top-0"
       ></div>
     </div>
   );
+}
+
+function activeItem(itemSelected) {
+  document.querySelectorAll(".date-list-item").forEach((item) => {
+    if (item.classList.contains("active-date-item")) {
+      item.classList.remove("active-date-item");
+    }
+  });
+
+  itemSelected.target.parentNode.parentNode.classList.add("active-date-item");
 }
 
 export default DateInScrollBar;
