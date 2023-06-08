@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function MainSection() {
   return (
     <nav className="navbar navbar-dark bg-2 navbar-expand-sm">
       <div className="container-fluid">
@@ -33,4 +33,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default MainSection;

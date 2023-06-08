@@ -1,14 +1,15 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import mainSection from "./components/mainSection/mainSection";
+import MainSection from "./components/mainSection/MainSection";
 import RoutesTaskSection from "./components/task_list/RoutesTaskList";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route exact path="/" Component={mainSection} />
-        <Route exact path="/tasklist/*" Component={RoutesTaskSection} />
+        <Route exact path="/" element={<MainSection />} />
+        <Route exact path="/tasklist/*" element={<RoutesTaskSection />} />
       </Routes>
     </div>
   );

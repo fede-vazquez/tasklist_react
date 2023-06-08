@@ -3,9 +3,9 @@ import React from "react";
 function TaskRepeatInfo({ daysRepeat }) {
   let taskRepeatInfo = null;
 
-  if (daysRepeat[0] == "no repeat") {
+  if (daysRepeat[0] === "no repeat") {
     taskRepeatInfo = "No se repite";
-  } else if (daysRepeat[0] == "everyday") {
+  } else if (daysRepeat[0] === "everyday") {
     taskRepeatInfo = "Todos los días";
   }
 

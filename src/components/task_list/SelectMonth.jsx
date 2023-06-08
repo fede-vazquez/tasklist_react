@@ -1,3 +1,4 @@
+import React from "react";
 import dayjs from "dayjs";
 
 function SelectMonth({ selectedMonth, newDate }) {
@@ -18,7 +19,7 @@ function SelectMonth({ selectedMonth, newDate }) {
 
   const selectMonth = (e) => {
     const selectedMonthObjet = monthList.find(
-      (month) => month.name == e.target.innerText
+      (month) => month.name === e.target.innerText
     );
 
     const newDateSelected = dayjs()
@@ -52,7 +53,7 @@ function SelectMonth({ selectedMonth, newDate }) {
                 key={month.monthNumber}
                 onClick={selectMonth}
                 className={`dropdown-item bg-transparent text-white ${
-                  month.name == selectedMonth ? "d-none" : ""
+                  month.name === selectedMonth ? "d-none" : ""
                 }`}
               >
                 {month.name}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import DateInScrollBar from "./DateInScrollBar";
 
 import dayjs from "dayjs";
@@ -6,6 +6,8 @@ import "dayjs/locale/es";
 dayjs.locale("es");
 
 function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
+  const containerListRef = useRef(null);
+
   // Saca el primer y ultimo día del més actual
   const startMonth = dayjs().month(selectedMonth).startOf("month");
   const endMonth = dayjs().month(selectedMonth).endOf("month");
@@ -28,8 +30,11 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
   }
 
   return (
-    <div className="text-white px-2 overflow-x-auto">
-      <ul className="date-list-container d-flex align-items-end">
+    <div className="text-white px-2">
+      <ul
+        ref={containerListRef}
+        className="overflow-x-scroll dates-list d-flex align-items-end"
+      >
         {dates.map((date, i) => {
           return (
             <li
@@ -37,7 +42,11 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
               ${dateSelected.date() === date.date() ? "active-date-item" : ""}`}
               key={date.format("dddd") + i}
             >
-              <DateInScrollBar date={date} newDate={selectNewDate} />
+              <DateInScrollBar
+                containerListRef={containerListRef}
+                date={date}
+                newDate={selectNewDate}
+              />
             </li>
           );
         })}

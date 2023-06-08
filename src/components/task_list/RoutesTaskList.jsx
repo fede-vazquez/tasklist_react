@@ -8,7 +8,7 @@ function MainTaskSection() {
     <div>
       <NavBar />
       <Routes>
-        <Route exact path="/" Component={MainTaskList} />
+        <Route exact path="/" element={<MainTaskList />} />
       </Routes>
     </div>
   );

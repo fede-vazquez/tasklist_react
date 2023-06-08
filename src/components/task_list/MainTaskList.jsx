@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import DateTaskList from "./DateTaskList";
 import DatesScrollBar from "./DatesScrollBar";
 import SelectMonth from "./SelectMonth";
@@ -7,7 +7,8 @@ import dayjs from "dayjs";
 
 function MainTaskList() {
   const [date, setDate] = useState(dayjs());
-  const dateFormat = date.format("DD/MM/YYYY");
+  const completeDateFormat = date.format("DD/MM/YYYY");
+  const monthDateFormat = date.format("MM/YYYY");
 
   const monthCapitalized =
     date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
@@ -15,28 +16,29 @@ function MainTaskList() {
   function newDate(newDateSelected) {
     const newDateFormat = newDateSelected.format("DD/MM/YYYY");
 
-    if (newDateFormat != dateFormat) {
+    if (newDateFormat !== completeDateFormat) {
       setDate(newDateSelected);
-      console.log(dateFormat);
     }
   }
-
   return (
-    <div className={dateFormat}>
+    <div className={completeDateFormat}>
       <SelectMonth
-        key={"SelectedMonth" + dateFormat}
+        key={"SelectedMonth" + completeDateFormat}
         selectedMonth={monthCapitalized}
         newDate={newDate}
       />
 
       <DatesScrollBar
-        key={"DatesScrollBar" + dateFormat}
+        key={"DatesScrollBar" + monthDateFormat}
         selectedMonth={date.month()}
         dateSelected={date}
         newDate={newDate}
       />
 
-      <SelectedDate key={"SelectedDate" + dateFormat} dateSelected={date} />
+      <SelectedDate
+        key={"SelectedDate" + completeDateFormat}
+        dateSelected={date}
+      />
 
       <DateTaskList date="Fecha seleccionada" />
     </div>
