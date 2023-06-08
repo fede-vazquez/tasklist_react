@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { centerItemX } from "../../utils/centerItemsInList";
 
 function DateInScrollBar({ date, newDate, containerListRef }) {
   const dateAbbreviation = date.format("ddd");
@@ -9,7 +10,7 @@ function DateInScrollBar({ date, newDate, containerListRef }) {
   function selectItem() {
     // Probando
     setTimeout(() => {
-      centerItem();
+      centerItemX(containerListRef.current);
     }, 10);
 
     // Agrega la clase para "activar" uno de los items
@@ -25,7 +26,7 @@ function DateInScrollBar({ date, newDate, containerListRef }) {
       thisItemListRef.current.parentNode.classList.contains("active-date-item");
     setTimeout(() => {
       if (itemActive) {
-        centerItem();
+        centerItemX(containerListRef.current);
       }
     }, 50);
   }, []);
@@ -55,42 +56,6 @@ function DateInScrollBar({ date, newDate, containerListRef }) {
       }
     });
     itemSelected.classList.add("active-date-item");
-  }
-
-  // Centra el elemento.
-  function centerItem() {
-    const container = containerListRef.current;
-    if (container) {
-      // Verificación adicional
-      const itemSelected = container.querySelector(".active-date-item");
-      if (itemSelected) {
-        const containerWidth = container.offsetWidth;
-        const itemWidth = itemSelected.offsetWidth;
-        const itemOffsetLeft = itemSelected.offsetLeft;
-        const scrollLeft = itemOffsetLeft - (containerWidth - itemWidth) / 2;
-
-        // Si el item esta a la derecha
-        if (container.scrollLeft < scrollLeft) {
-          const differentSpace = -1 * (container.scrollLeft - scrollLeft);
-          for (let i = 1; i <= differentSpace; i++) {
-            setTimeout(() => {
-              container.scrollLeft = container.scrollLeft + 1;
-            }, i * 2.5);
-          }
-        }
-
-        // Si el item esta a la izquierda
-        if (container.scrollLeft > scrollLeft) {
-          const differentSpace = container.scrollLeft - scrollLeft;
-          for (let i = 1; i <= differentSpace; i++) {
-            setTimeout(() => {
-              container.scrollLeft = container.scrollLeft - 1;
-            }, i * 2.5);
-          }
-        }
-        setTimeout(() => {}, 1000);
-      }
-    }
   }
 }
 

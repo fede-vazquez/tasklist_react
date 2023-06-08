@@ -1,5 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
+import { centerItemX } from "../../utils/centerItemsInList";
 
 function SelectMonth({ selectedMonth, newDate }) {
   const monthList = [
@@ -31,6 +32,9 @@ function SelectMonth({ selectedMonth, newDate }) {
 
   function dateNow() {
     newDate(dayjs());
+    setTimeout(() => {
+      centerItemX(document.querySelector(".dates-list"));
+    }, 10);
   }
 
   return (
