@@ -29,6 +29,11 @@ p {
 
 .dates-list {
   height: 6rem;
+  scrollbar-width: none; /* Desactiva el scrollbar en navegadores basados en WebKit */
+  -ms-overflow-style: none; /* Desactiva el scrollbar en Internet Explorer y Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Desactiva el scrollbar en navegadores basados en WebKit */
+  }
 }
 
 .date-list-item {
