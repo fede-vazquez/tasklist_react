@@ -1,34 +1,24 @@
-// Centra el elemento horizontalmente.
-export function centerItemX(container) {
-  if (container) {
-    // Verificación adicional
-    const itemSelected = container.querySelector(".active-date-item");
-    if (itemSelected) {
-      const containerWidth = container.offsetWidth;
-      const itemWidth = itemSelected.offsetWidth;
-      const itemOffsetLeft = itemSelected.offsetLeft;
-      const scrollLeft = itemOffsetLeft - (containerWidth - itemWidth) / 2;
+import { scroller } from "react-scroll";
 
-      // Si el item esta a la derecha
-      if (container.scrollLeft < scrollLeft) {
-        const differentSpace = -1 * (container.scrollLeft - scrollLeft);
-        for (let i = 1; i <= differentSpace; i++) {
-          setTimeout(() => {
-            container.scrollLeft = container.scrollLeft + 1;
-          }, i * 2.5);
-        }
-      }
+// React scroll
 
-      // Si el item esta a la izquierda
-      if (container.scrollLeft > scrollLeft) {
-        const differentSpace = container.scrollLeft - scrollLeft;
-        for (let i = 1; i <= differentSpace; i++) {
-          setTimeout(() => {
-            container.scrollLeft = container.scrollLeft - 1;
-          }, i * 2.5);
-        }
-      }
-      setTimeout(() => {}, 1000);
-    }
-  }
+export function scrollToActiveItemX(itemToCenterName, containerName, offset) {
+  const nameItem = document
+    .querySelector(itemToCenterName)
+    .getAttribute("name");
+  scroller.scrollTo(nameItem, {
+    duration: 900,
+    smooth: "easeInOutQuart",
+    containerId: containerName,
+    offset: offset,
+    horizontal: true,
+  });
+}
+
+export function getOffSet(containerName, itemName) {
+  const container = document.querySelector(containerName);
+  const item = document.querySelector(itemName);
+  const containerWidth = container.offsetWidth;
+  const itemWidth = item.offsetWidth;
+  return (-1 * (containerWidth - itemWidth)) / 2;
 }

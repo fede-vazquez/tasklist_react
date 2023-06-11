@@ -32,15 +32,17 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
   return (
     <div className="text-white px-2">
       <ul
+        id="dates-list"
         ref={containerListRef}
-        className="overflow-x-scroll dates-list d-flex align-items-end"
+        className="overflow-x-scroll d-flex align-items-end"
       >
         {dates.map((date, i) => {
           return (
             <li
+              name={date.format("DD/MM/YYYY")}
+              key={date.format("dddd") + i}
               className={`rounded-3 date-list-item 
               ${dateSelected.date() === date.date() ? "active-date-item" : ""}`}
-              key={date.format("dddd") + i}
             >
               <DateInScrollBar
                 containerListRef={containerListRef}

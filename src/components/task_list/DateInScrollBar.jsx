@@ -1,34 +1,38 @@
 import React, { useEffect, useRef } from "react";
-import { centerItemX } from "../../utils/centerItemsInList";
+import { getOffSet, scrollToActiveItemX } from "../../utils/centerItemsInList";
 
-function DateInScrollBar({ date, newDate, containerListRef }) {
+function DateInScrollBar({ date, newDate }) {
   const dateAbbreviation = date.format("ddd");
   const dateNumber = date.format("D");
 
   const thisItemListRef = useRef();
 
   function selectItem() {
-    // Probando
     setTimeout(() => {
-      centerItemX(containerListRef.current);
+      scrollToActiveItemX(
+        ".active-date-item",
+        "dates-list",
+        getOffSet("#dates-list", ".active-date-item"),
+        ".active-date-item"
+      );
     }, 10);
-
-    // Agrega la clase para "activar" uno de los items
-    // y elimina las clase de los demás.
-    activeItem(containerListRef.current);
 
     // Cambia la fecha que se usa en los componentes.
     newDate(date.date(dateNumber));
   }
 
   useEffect(() => {
-    const itemActive =
-      thisItemListRef.current.parentNode.classList.contains("active-date-item");
-    setTimeout(() => {
-      if (itemActive) {
-        centerItemX(containerListRef.current);
-      }
-    }, 50);
+    if (
+      thisItemListRef.current.parentNode.classList.contains("active-date-item")
+    ) {
+      setTimeout(() => {
+        scrollToActiveItemX(
+          ".active-date-item",
+          "dates-list",
+          getOffSet("#dates-list", ".active-date-item")
+        );
+      }, 10);
+    }
   }, []);
 
   return (
@@ -46,17 +50,6 @@ function DateInScrollBar({ date, newDate, containerListRef }) {
       ></div>
     </div>
   );
-
-  // Agrega la clase "active-date-item".
-  function activeItem(container) {
-    const itemSelected = container.querySelector(".active-date-item");
-    document.querySelectorAll(".date-list-item").forEach((item) => {
-      if (item.classList.contains("active-date-item")) {
-        item.classList.remove("active-date-item");
-      }
-    });
-    itemSelected.classList.add("active-date-item");
-  }
 }
 
 export default DateInScrollBar;

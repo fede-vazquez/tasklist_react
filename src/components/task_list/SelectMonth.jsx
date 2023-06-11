@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { centerItemX } from "../../utils/centerItemsInList";
+import { scrollToActiveItemX, getOffSet } from "../../utils/centerItemsInList";
 
 function SelectMonth({ selectedMonth, newDate }) {
   const monthList = [
@@ -32,8 +32,14 @@ function SelectMonth({ selectedMonth, newDate }) {
 
   function dateNow() {
     newDate(dayjs());
+
+    // Centra el día actual
     setTimeout(() => {
-      centerItemX(document.querySelector(".dates-list"));
+      scrollToActiveItemX(
+        ".active-date-item",
+        "dates-list",
+        getOffSet("#dates-list", ".active-date-item")
+      );
     }, 10);
   }
 
