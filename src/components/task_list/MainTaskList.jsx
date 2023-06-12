@@ -4,6 +4,7 @@ import DatesScrollBar from "./DatesScrollBar";
 import SelectMonth from "./SelectMonth";
 import SelectedDate from "./SelectedDate";
 import dayjs from "dayjs";
+import AddTaskButton from "./AddTaskButton";
 
 function MainTaskList() {
   const [date, setDate] = useState(dayjs());
@@ -41,6 +42,8 @@ function MainTaskList() {
       />
 
       <DateTaskList date="Fecha seleccionada" />
+
+      <AddTaskButton />
     </div>
   );
 }

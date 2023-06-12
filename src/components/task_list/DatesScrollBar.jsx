@@ -42,7 +42,11 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
               name={date.format("DD/MM/YYYY")}
               key={date.format("dddd") + i}
               className={`rounded-3 date-list-item 
-              ${dateSelected.date() === date.date() ? "active-date-item" : ""}`}
+              ${
+                dateSelected.date() === date.date()
+                  ? "active-date-item bg-2 h-100"
+                  : ""
+              }`}
             >
               <DateInScrollBar
                 containerListRef={containerListRef}
