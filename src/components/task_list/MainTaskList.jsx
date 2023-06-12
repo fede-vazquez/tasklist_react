@@ -11,9 +11,6 @@ function MainTaskList() {
   const completeDateFormat = date.format("DD/MM/YYYY");
   const monthDateFormat = date.format("MM/YYYY");
 
-  const monthCapitalized =
-    date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
-
   function newDate(newDateSelected) {
     const newDateFormat = newDateSelected.format("DD/MM/YYYY");
 
@@ -21,11 +18,12 @@ function MainTaskList() {
       setDate(newDateSelected);
     }
   }
+
   return (
-    <div className={completeDateFormat}>
+    <div>
       <SelectMonth
         key={"SelectedMonth" + completeDateFormat}
-        selectedMonth={monthCapitalized}
+        date={date}
         newDate={newDate}
       />
 

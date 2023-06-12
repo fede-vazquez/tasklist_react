@@ -2,7 +2,12 @@ import React from "react";
 import dayjs from "dayjs";
 import { scrollToActiveItemX, getOffSet } from "../../utils/centerItemsInList";
 
-function SelectMonth({ selectedMonth, newDate }) {
+function SelectMonth({ date, newDate }) {
+  const dateFormat = date.format("DD/MM/YYY");
+  const monthCapitalized =
+    date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
+  const selectedMonth = monthCapitalized;
+
   const monthList = [
     { monthNumber: 1, name: "Enero" },
     { monthNumber: 2, name: "Febrero" },
