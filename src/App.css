@@ -1,4 +1,8 @@
 /* general */
+body {
+  color: white;
+}
+
 ul,
 ol {
   list-style-type: none;
@@ -10,7 +14,22 @@ p {
   margin: 0;
 }
 
+/* Bootstrap config */
+
+.form-check-input {
+  height: 1.5rem !important;
+  width: 3rem !important;
+  transition: 0.5s !important;
+}
+
 /* add font-size */
+
+.fs-xxl {
+  font-size: 4rem;
+}
+.fs-xl {
+  font-size: 3rem;
+}
 
 .fs-7 {
   font-size: 0.8rem;

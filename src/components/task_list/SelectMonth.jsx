@@ -59,7 +59,7 @@ function SelectMonth({ date, newDate }) {
           aria-expanded="false"
         >
           {selectedMonth}
-          <i className="fa-solid fa-caret-down ps-1 text-white"></i>
+          <i className="fa-solid fa-caret-down ps-1"></i>
         </button>
         <ul className="dropdown-menu p-0 bg-1">
           {monthList.map((month) => {
@@ -67,7 +67,7 @@ function SelectMonth({ date, newDate }) {
               <li
                 key={month.monthNumber}
                 onClick={selectMonth}
-                className={`dropdown-item bg-transparent text-white ${
+                className={`dropdown-item bg-transparent ${
                   month.name === selectedMonth ? "d-none" : ""
                 }`}
               >

@@ -30,7 +30,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
   }
 
   return (
-    <div className="text-white px-2">
+    <div className="px-2">
       <ul
         id="dates-list"
         ref={containerListRef}

@@ -28,7 +28,7 @@ function DateTaskList({ date }) {
   ];
 
   return (
-    <div className="text-white bg-2">
+    <div className="bg-2">
       <ul>
         {tasks.map((task, i) => {
           return (
