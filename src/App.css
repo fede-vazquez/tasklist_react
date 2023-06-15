@@ -68,3 +68,23 @@ p {
     background-color: #545454;
   }
 }
+
+/* Form config */
+
+.task_hour_label:focus-within {
+  animation: selectedInput 1.5s infinite;
+}
+
+/* Animations */
+
+@keyframes selectedInput {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
