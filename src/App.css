@@ -71,7 +71,7 @@ p {
 
 /* Form config */
 
-.task_hour_label:focus-within {
+.task_hour_contain_input:focus-within .task_hour_text {
   animation: selectedInput 1.5s infinite;
 }
 

@@ -25,9 +25,13 @@ function MainTaskForm() {
           />
         </label>
 
-        <label htmlFor="Task_hour" className="task_hour_label">
-          <p className="fs-xxl">{form.hour || "00:00"}</p>
-
+        <div className="task_hour_contain_input pb-3">
+          <label htmlFor="Task_hour">
+            Horario:
+            <span className="fs-xxl task_hour_text d-block lh-1">
+              {form.hour || "00:00"}
+            </span>
+          </label>
           <input
             onChange={(e) => handleChanges(e)}
             className="visually-hidden task_hour_input"
@@ -36,7 +40,7 @@ function MainTaskForm() {
             id="Task_hour"
             value={form.hour || "00:00"}
           />
-        </label>
+        </div>
 
         <label className="w-100 my-2">
           <textarea
