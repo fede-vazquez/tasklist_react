@@ -6,7 +6,7 @@ function MainTaskForm() {
   function handleChanges(e) {
     const eventInputName = e.target.name;
     const eventValue = e.target.value;
-    console.log(eventInputName + " " + eventValue);
+
     setForm({
       ...form,
       [eventInputName]: eventValue,
@@ -18,10 +18,12 @@ function MainTaskForm() {
       <form className="col-10 m-auto py-4">
         <label className="w-100 my-2">
           <input
+            onChange={(e) => handleChanges(e)}
             className="w-100 p-2 border-0 rounded-2"
             type="text"
             name="name"
             placeholder="Nombre"
+            value={form.name}
           />
         </label>
 
@@ -43,22 +45,42 @@ function MainTaskForm() {
         </div>
 
         <label className="w-100 my-2">
+          <input
+            onChange={(e) => handleChanges(e)}
+            className="w-100 p-2 border-0 rounded-2"
+            type="text"
+            name="genre"
+            placeholder="Genero"
+            value={form.genre}
+          />
+        </label>
+
+        <label className="w-100 my-2">
           <textarea
-            className="w-100"
+            onChange={(e) => handleChanges(e)}
+            className="w-100 border-0 rounded-2"
             name="description"
             placeholder="descripción"
+            value={form.description}
           ></textarea>
         </label>
 
-        <label className="d-flex align-items-center justify-content-between px-2 form-switch w-100">
-          <p>Day</p>
+        <div className="d-flex align-items-center justify-content-between px-2 form-switch w-100">
+          <label htmlFor="task_check_day">
+            <p>Day</p>
+          </label>
           <input
+            id="task_check_day"
             className="form-check-input m-0"
             type="checkbox"
             role="switch"
             name="select-this-date"
           />
-        </label>
+        </div>
+
+        <div className="text-center my-3">
+          <i className="fa-solid btn-1 bg-2 py-3 rounded-3 fa-plus col-11"></i>
+        </div>
       </form>
     </section>
   );
