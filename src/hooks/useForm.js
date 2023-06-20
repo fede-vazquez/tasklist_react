@@ -1,18 +1,55 @@
 import { useState } from "react";
 
-export const useForm = (initialForm, validations) => {
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState();
+const validationsFormInputs = (e, validations, errors) => {
+  const { name: inputName, value: inputValue } = e.target;
 
-  function handleChanges(e) {
-    const eventInputName = e.target.name;
-    const eventValue = e.target.value;
+  const validationSelected = validations.find(
+    (validation) => validation.name === inputName
+  );
 
-    setForm({
-      ...form,
-      [eventInputName]: eventValue,
-    });
+  if (validationSelected) {
+    if (!validationSelected.validation(inputValue)) {
+      errors[inputName] = { msg: validationSelected.errorMessage };
+    } else {
+      delete errors[inputName];
+    }
   }
 
-  return { form, errors, handleChanges };
+  return errors;
+};
+
+export const useForm = (initialForm, validations) => {
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
+
+  function handleChanges(e) {
+    const { name: inputName, value: inputValue } = e.target;
+    setForm({
+      ...form,
+      [inputName]: inputValue,
+    });
+    setErrors(validationsFormInputs(e, validations, errors));
+  }
+
+  function handleBlur(e) {
+    handleChanges(e);
+  }
+
+  function onSubmit() {
+    const formKeys = Object.keys(form);
+
+    formKeys.forEach((key) => {
+      const fakeEvent = {
+        target: {
+          name: key,
+          value: form[key],
+        },
+      };
+      setErrors(validationsFormInputs(fakeEvent, validations, errors));
+    });
+
+    console.log(errors);
+  }
+
+  return { form, errors, handleChanges, handleBlur, onSubmit };
 };
