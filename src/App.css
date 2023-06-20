@@ -22,7 +22,7 @@ p {
   transition: 0.5s !important;
 }
 
-/* add font-size */
+/* add font style */
 
 .fs-xxl {
   font-size: 4rem;
@@ -33,6 +33,10 @@ p {
 
 .fs-7 {
   font-size: 0.8rem;
+}
+
+.text-error {
+  color: red;
 }
 
 /* backgrounds */

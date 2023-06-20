@@ -1,20 +1,33 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
+import { validationsTaskForm } from "../../../validations/validationsTaskList";
+import { useNavigate } from "react-router-dom";
+
+const initialForm = {
+  title: "",
+  hour: "00:00",
+  description: "",
+  genre: "",
+};
 
 function MainTaskForm() {
   const navigate = useNavigate();
-  const { form, errors, handleChanges } = useForm({});
+  const { form, errors, handleChanges, handleBlur, onSubmit } = useForm(
+    initialForm,
+    validationsTaskForm
+  );
 
-  function submitForm(formValues) {
-    const validations = "";
-    if (validations) {
-      // código para que se guarde la tarea.
+  const [switchRender, setSetSwitchRender] = useState(false);
 
+  function onSubmitAndRedirect() {
+    onSubmit();
+    if (Object.keys(errors).length === 0) {
+      // Lógica que cree la tarea en el localStorage.
       navigate("/tasklist");
-    } else {
-      // código que se ejecuta si hay algún error.
     }
+    // Cambia el valor del estado "switchRender".
+    // para volver a cargar el componente y lograr ver los mensajes de error.
+    setSetSwitchRender(!switchRender);
   }
 
   return (
@@ -23,6 +36,7 @@ function MainTaskForm() {
         <label className="w-100 my-2">
           <input
             onChange={(e) => handleChanges(e)}
+            onBlur={(e) => handleBlur(e)}
             className="w-100 p-2 border-0 rounded-2"
             type="text"
             name="title"
@@ -30,6 +44,7 @@ function MainTaskForm() {
             value={form.title || ""}
           />
         </label>
+        {errors?.title && <p className="text-error">{errors.title.msg}</p>}
 
         <div className="task_hour_contain_input pb-3">
           <label htmlFor="Task_hour">
@@ -49,21 +64,22 @@ function MainTaskForm() {
         </div>
 
         <div className="d-flex align-items-center justify-content-between px-2 form-switch w-100">
-          <label htmlFor="task_check_day">
-            <p>Day</p>
+          <label htmlFor="task_check_all_day">
+            <p>Todo el día</p>
           </label>
           <input
-            id="task_check_day"
+            id="task_check_all_day"
             className="form-check-input m-0"
             type="checkbox"
             role="switch"
-            name="select-this-date"
+            name="all_day"
           />
         </div>
 
         <label className="w-100 my-2">
           <input
             onChange={(e) => handleChanges(e)}
+            onBlur={(e) => handleBlur(e)}
             className="w-100 p-2 border-0 rounded-2"
             type="text"
             name="genre"
@@ -71,6 +87,7 @@ function MainTaskForm() {
             value={form.genre || ""}
           />
         </label>
+        {errors?.genre && <p className="text-error">{errors.genre.msg}</p>}
 
         <label className="w-100 my-2">
           <textarea
@@ -84,7 +101,7 @@ function MainTaskForm() {
 
         <div
           to={"/tasklist"}
-          onClick={() => submitForm(form)}
+          onClick={() => onSubmitAndRedirect(form)}
           className="text-center my-3"
         >
           <i className="fa-solid btn-1 bg-2 py-3 rounded-3 fa-plus col-11"></i>
