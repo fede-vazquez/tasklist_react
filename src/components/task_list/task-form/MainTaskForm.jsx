@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "../../../hooks/useForm";
 
 function MainTaskForm() {
-  const [form, setForm] = useState({});
+  const navigate = useNavigate();
+  const { form, errors, handleChanges } = useForm({});
 
-  function handleChanges(e) {
-    const eventInputName = e.target.name;
-    const eventValue = e.target.value;
+  function submitForm(formValues) {
+    const validations = "";
+    if (validations) {
+      // código para que se guarde la tarea.
 
-    setForm({
-      ...form,
-      [eventInputName]: eventValue,
-    });
+      navigate("/tasklist");
+    } else {
+      // código que se ejecuta si hay algún error.
+    }
   }
 
   return (
@@ -21,9 +25,9 @@ function MainTaskForm() {
             onChange={(e) => handleChanges(e)}
             className="w-100 p-2 border-0 rounded-2"
             type="text"
-            name="name"
-            placeholder="Nombre"
-            value={form.name}
+            name="title"
+            placeholder="Título"
+            value={form.title || ""}
           />
         </label>
 
@@ -44,27 +48,6 @@ function MainTaskForm() {
           />
         </div>
 
-        <label className="w-100 my-2">
-          <input
-            onChange={(e) => handleChanges(e)}
-            className="w-100 p-2 border-0 rounded-2"
-            type="text"
-            name="genre"
-            placeholder="Genero"
-            value={form.genre}
-          />
-        </label>
-
-        <label className="w-100 my-2">
-          <textarea
-            onChange={(e) => handleChanges(e)}
-            className="w-100 border-0 rounded-2"
-            name="description"
-            placeholder="descripción"
-            value={form.description}
-          ></textarea>
-        </label>
-
         <div className="d-flex align-items-center justify-content-between px-2 form-switch w-100">
           <label htmlFor="task_check_day">
             <p>Day</p>
@@ -78,7 +61,32 @@ function MainTaskForm() {
           />
         </div>
 
-        <div className="text-center my-3">
+        <label className="w-100 my-2">
+          <input
+            onChange={(e) => handleChanges(e)}
+            className="w-100 p-2 border-0 rounded-2"
+            type="text"
+            name="genre"
+            placeholder="Genero"
+            value={form.genre || ""}
+          />
+        </label>
+
+        <label className="w-100 my-2">
+          <textarea
+            onChange={(e) => handleChanges(e)}
+            className="w-100 border-0 rounded-2"
+            name="description"
+            placeholder="descripción"
+            value={form.description || ""}
+          ></textarea>
+        </label>
+
+        <div
+          to={"/tasklist"}
+          onClick={() => submitForm(form)}
+          className="text-center my-3"
+        >
           <i className="fa-solid btn-1 bg-2 py-3 rounded-3 fa-plus col-11"></i>
         </div>
       </form>
