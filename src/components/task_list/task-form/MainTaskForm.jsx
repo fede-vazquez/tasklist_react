@@ -2,25 +2,35 @@ import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { validationsTaskForm } from "../../../validations/validationsTaskList";
 import { useNavigate } from "react-router-dom";
+import DaysSelector from "./DaysSelector";
 
 const initialForm = {
   title: "",
   hour: "00:00",
   description: "",
   genre: "",
+  allDay: false,
+  weekDaySelected: [],
 };
 
 function MainTaskForm() {
   const navigate = useNavigate();
-  const { form, errors, handleChanges, handleBlur, onSubmit } = useForm(
-    initialForm,
-    validationsTaskForm
-  );
+
+  const {
+    form,
+    errors,
+    handleChanges,
+    handleBlur,
+    handleCheckbox,
+    handleMultipleCheckbox,
+    onSubmit,
+  } = useForm(initialForm, validationsTaskForm);
 
   const [switchRender, setSetSwitchRender] = useState(false);
 
   function onSubmitAndRedirect() {
     onSubmit();
+    console.log(form);
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
       navigate("/tasklist");
@@ -41,7 +51,7 @@ function MainTaskForm() {
             type="text"
             name="title"
             placeholder="Título"
-            value={form.title || ""}
+            value={form.title}
           />
         </label>
         {errors?.title && <p className="text-error">{errors.title.msg}</p>}
@@ -68,13 +78,17 @@ function MainTaskForm() {
             <p>Todo el día</p>
           </label>
           <input
+            onChange={(e) => handleCheckbox(e)}
             id="task_check_all_day"
             className="form-check-input m-0"
             type="checkbox"
             role="switch"
-            name="all_day"
+            name="allDay"
+            checked={form.allDay}
           />
         </div>
+
+        <DaysSelector handleMultipleCheckbox={handleMultipleCheckbox} />
 
         <label className="w-100 my-2">
           <input
@@ -84,7 +98,7 @@ function MainTaskForm() {
             type="text"
             name="genre"
             placeholder="Genero"
-            value={form.genre || ""}
+            value={form.genre}
           />
         </label>
         {errors?.genre && <p className="text-error">{errors.genre.msg}</p>}
@@ -95,7 +109,7 @@ function MainTaskForm() {
             className="w-100 border-0 rounded-2"
             name="description"
             placeholder="descripción"
-            value={form.description || ""}
+            value={form.description}
           ></textarea>
         </label>
 
