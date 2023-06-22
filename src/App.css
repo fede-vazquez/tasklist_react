@@ -73,6 +73,18 @@ p {
   }
 }
 
+.circle-checkbox {
+  padding: 1.2rem;
+  width: 2rem !important;
+  height: 2rem !important;
+  background-color: #373737;
+  transition: 150ms;
+}
+
+.circle-checkbox-active {
+  background-color: #545454;
+}
+
 /* Form config */
 
 .task_hour_contain_input:focus-within .task_hour_text {

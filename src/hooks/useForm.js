@@ -66,7 +66,6 @@ export const useForm = (initialForm, validations) => {
       ...form,
       [formInputName]: selectedChecked,
     });
-    console.log(selectedChecked);
   }
 
   function onSubmit() {
@@ -80,7 +79,6 @@ export const useForm = (initialForm, validations) => {
         },
       };
       setErrors(validationsFormInputs(fakeEvent, validations, errors));
-      console.log(form);
     });
   }
 
