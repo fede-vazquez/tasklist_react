@@ -45,26 +45,26 @@ export const useForm = (initialForm, validations) => {
 
   function handleMultipleCheckbox(e, formInputName, checkboxId) {
     const customAttribute = e.target.getAttribute("customattribute");
-
     const { checked } = e.target;
 
-    let selectedChecked = [...(form[formInputName] || [])];
+    setForm((prevForm) => {
+      let selectedChecked = [...(prevForm[formInputName] || [])];
 
-    if (checked) {
-      selectedChecked.push({
-        id: checkboxId,
-        checkboxName: customAttribute,
-      });
-    } else {
-      const customCheckedList = selectedChecked.filter((checkedItem) => {
-        return checkedItem.checkboxName !== customAttribute;
-      });
-      selectedChecked = customCheckedList;
-    }
+      if (checked) {
+        selectedChecked.push({
+          id: checkboxId,
+          checkboxName: customAttribute,
+        });
+      } else {
+        selectedChecked = selectedChecked.filter(
+          (checkedItem) => checkedItem.checkboxName !== customAttribute
+        );
+      }
 
-    setForm({
-      ...form,
-      [formInputName]: selectedChecked,
+      return {
+        ...prevForm,
+        [formInputName]: selectedChecked,
+      };
     });
   }
 
