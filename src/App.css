@@ -91,6 +91,31 @@ p {
   animation: selectedInput 1.5s infinite;
 }
 
+.result-options-list {
+  background-color: #545454;
+  margin-top: 0;
+  height: 0;
+  overflow-y: auto;
+  transition: 1s;
+}
+
+.result-option {
+  padding: 0.2rem 1rem;
+  &:hover {
+    background-color: #373737;
+  }
+}
+
+.genre-input-container:focus-within {
+  .result-options-list {
+    height: 6rem;
+  }
+  .genre-input {
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+  }
+}
+
 /* Animations */
 
 @keyframes selectedInput {

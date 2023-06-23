@@ -3,6 +3,7 @@ import { useForm } from "../../../hooks/useForm";
 import { validationsTaskForm } from "../../../validations/validationsTaskList";
 import { useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
+import GenreInput from "./GenreInput";
 
 const initialForm = {
   title: "",
@@ -93,25 +94,20 @@ function MainTaskForm() {
           daysSelected={form.weekDaySelected}
         />
 
-        <label className="w-100 my-2">
-          <input
-            onChange={(e) => handleChanges(e)}
-            onBlur={(e) => handleBlur(e)}
-            className="w-100 p-2 border-0 rounded-2"
-            type="text"
-            name="genre"
-            placeholder="Genero"
-            value={form.genre}
-          />
-        </label>
+        <GenreInput
+          handleChanges={handleChanges}
+          handleBlur={handleBlur}
+          form={form}
+        />
+
         {errors?.genre && <p className="text-error">{errors.genre.msg}</p>}
 
         <label className="w-100 my-2">
           <textarea
             onChange={(e) => handleChanges(e)}
-            className="w-100 border-0 rounded-2"
+            className="w-100 border-0 rounded-2 p-1"
             name="description"
-            placeholder="descripción"
+            placeholder="Descripción"
             value={form.description}
           ></textarea>
         </label>
