@@ -88,7 +88,10 @@ function MainTaskForm() {
           />
         </div>
 
-        <DaysSelector handleMultipleCheckbox={handleMultipleCheckbox} />
+        <DaysSelector
+          handleMultipleCheckbox={handleMultipleCheckbox}
+          daysSelected={form.weekDaySelected}
+        />
 
         <label className="w-100 my-2">
           <input

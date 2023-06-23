@@ -21,7 +21,7 @@ function handleCheckedBackground(e) {
   }
 }
 
-function DaysSelector({ handleMultipleCheckbox }) {
+function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
   const allDaysSelected = document.getElementById("task_check_repeat_all_days");
 
   return (
@@ -50,6 +50,9 @@ function DaysSelector({ handleMultipleCheckbox }) {
           </li>
         ))}
       </ul>
+
+      {daysSelected.length == 0 && <p className="ms-2">No se repite</p>}
+
       <CheckedAllCheckboxesInput
         daysInWeek={daysInWeek}
         handleCheckedBackground={handleCheckedBackground}
