@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { validationsTaskForm } from "../../../validations/validationsTaskList";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
+import { getQueryParams } from "../../../utils/getQueryParams";
 
 const initialForm = {
   title: "",
@@ -15,6 +16,10 @@ const initialForm = {
 };
 
 function MainTaskForm() {
+  const location = useLocation();
+  const params = getQueryParams(location.search, "date");
+  console.log(params);
+
   const navigate = useNavigate();
 
   const {

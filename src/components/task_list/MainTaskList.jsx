@@ -41,7 +41,7 @@ function MainTaskList() {
 
       <DateTaskList date="Fecha seleccionada" />
 
-      <AddTaskButton />
+      <AddTaskButton dateSelected={completeDateFormat} />
     </div>
   );
 }

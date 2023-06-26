@@ -3,7 +3,5 @@ export function search(valueToFind, listToSearch) {
     return item.toLowerCase().includes(valueToFind.toLowerCase());
   });
 
-  console.log(resultList);
-
   return resultList;
 }
