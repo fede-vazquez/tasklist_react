@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
 import { getQueryParams } from "../../../utils/getQueryParams";
+import { saveData } from "../../../utils/saveData";
 
 const initialForm = {
   title: "",
@@ -18,8 +19,6 @@ const initialForm = {
 function MainTaskForm() {
   const location = useLocation();
   const params = getQueryParams(location.search, "date");
-  console.log(params);
-
   const navigate = useNavigate();
 
   const {
@@ -39,6 +38,15 @@ function MainTaskForm() {
     console.log(form);
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
+      saveData("userTasks", {
+        title: form.title,
+        hour: form.hour,
+        description: form.description,
+        date: params.date,
+        genre: form.genre,
+        allDay: form.allDay,
+        weekDaySelected: form.weekDaySelected,
+      });
       navigate("/tasklist");
     }
     // Cambia el valor del estado "switchRender".
