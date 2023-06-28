@@ -2,42 +2,42 @@ import React from "react";
 import TaskItem from "./TaskItem";
 
 function DateTaskList({ date }) {
+  const dateCompleteFormat = date.format("DD/MM/YYYY");
+  const dayNumber = Number(date.format("d"));
   // Maqueta de como se verán las tareas en el local storage.
-  const tasks = [
-    {
-      repeatDays: ["Lunes", "Martes", "Jueves", "Viernes", "Sábado"],
-      dateRepeat: null,
-      name: "Ir a trabajar",
-      hour: "9:00AM",
-      genre: "trabajo",
-    },
-    {
-      repeatDays: ["no repeat"],
-      dateRepeat: null,
-      name: "Cumpleaños de alguien",
-      hour: "todo el día",
-      genre: "personal",
-    },
-    {
-      repeatDays: ["everyday"],
-      dateRepeat: null,
-      name: "Estudiar React",
-      hour: "4:00PM",
-      genre: "estudio",
-    },
-  ];
+  const tasks = localStorage.userTasks
+    ? JSON.parse(localStorage.userTasks)
+    : false;
+  let filterTasks;
+
+  if (tasks) {
+    filterTasks = tasks.filter((task) => {
+      // Si la tarea se repite este día.
+      const taskRepeatToday = task.weekDaySelected.some(
+        (day) => day.id === dayNumber
+      );
+
+      // Si la tarea no se repite, pero es el mismo día.
+      const taskOnlyThisDate =
+        dateCompleteFormat === task.date && task.weekDaySelected.length === 0;
+
+      return taskRepeatToday || taskOnlyThisDate;
+    });
+  }
 
   return (
     <div className="bg-2">
-      <ul>
-        {tasks.map((task, i) => {
-          return (
-            <li key={task.name + i}>
-              <TaskItem task={task} />
-            </li>
-          );
-        })}
-      </ul>
+      {tasks && (
+        <ul>
+          {filterTasks.map((task, i) => {
+            return (
+              <li key={task.id + "" + i}>
+                <TaskItem task={task} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

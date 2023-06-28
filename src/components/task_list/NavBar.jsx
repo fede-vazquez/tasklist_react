@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-dark bg-2 navbar-expand-sm">
       <div className="container-fluid">
-        <Link to={"/"} className="navbar-brand">
+        <Link to={"/tasklist"} className="navbar-brand">
           Home
         </Link>
         <button

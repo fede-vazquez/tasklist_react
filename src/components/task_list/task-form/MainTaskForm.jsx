@@ -35,7 +35,6 @@ function MainTaskForm() {
 
   function onSubmitAndRedirect() {
     onSubmit();
-    console.log(form);
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
       saveData("userTasks", {
@@ -128,6 +127,7 @@ function MainTaskForm() {
         <div
           to={"/tasklist"}
           onClick={() => onSubmitAndRedirect(form)}
+          role="button"
           className="text-center my-3"
         >
           <i className="fa-solid btn-1 bg-2 py-3 rounded-3 fa-plus col-11"></i>

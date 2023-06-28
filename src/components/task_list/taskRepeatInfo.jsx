@@ -3,9 +3,9 @@ import React from "react";
 function TaskRepeatInfo({ daysRepeat }) {
   let taskRepeatInfo = null;
 
-  if (daysRepeat[0] === "no repeat") {
+  if (daysRepeat.length === 0) {
     taskRepeatInfo = "No se repite";
-  } else if (daysRepeat[0] === "everyday") {
+  } else if (daysRepeat.length === 7) {
     taskRepeatInfo = "Todos los días";
   }
 
@@ -23,7 +23,8 @@ function TaskRepeatInfo({ daysRepeat }) {
     <ul className="text-end pe-3 fs-7 d-flex justify-content-end gap-1">
       {taskRepeatInfo && <li>{taskRepeatInfo}</li>}
 
-      {daysRepeat.length > 1 &&
+      {daysRepeat.length > 0 &&
+        daysRepeat.length < 7 &&
         weekDays.map((day, i) => {
           return (
             <li
