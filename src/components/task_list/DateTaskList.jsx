@@ -8,10 +8,10 @@ function DateTaskList({ date }) {
   const tasks = localStorage.userTasks
     ? JSON.parse(localStorage.userTasks)
     : false;
-  let filterTasks;
+  let dateTasks;
 
   if (tasks) {
-    filterTasks = tasks.filter((task) => {
+    dateTasks = tasks.filter((task) => {
       // Si la tarea se repite este día.
       const taskRepeatToday = task.weekDaySelected.some(
         (day) => day.id === dayNumber
@@ -29,7 +29,7 @@ function DateTaskList({ date }) {
     <div className="bg-2">
       {tasks && (
         <ul>
-          {filterTasks.map((task, i) => {
+          {dateTasks.map((task, i) => {
             return (
               <li key={task.id + "" + i}>
                 <TaskItem task={task} />

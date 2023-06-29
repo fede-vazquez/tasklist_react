@@ -4,11 +4,29 @@ import TaskRepeatInfo from "./TaskRepeatInfo";
 function TaskItem({ task }) {
   const namesRepeatDays = task.weekDaySelected.map((day) => day.checkboxName);
 
+  function handleCheckedBackground(e) {
+    const containerInput = e.target.parentNode;
+    if (!containerInput.classList.contains("circle-checkbox-active")) {
+      containerInput.classList.add("circle-checkbox-active");
+    } else {
+      containerInput.classList.remove("circle-checkbox-active");
+    }
+  }
+
   return (
     <div className="row m-0 border border-start-0 border-end-0 py-1">
-      <div className="col-2 d-flex align-items-center p-0 justify-content-end">
-        <i className="fa-regular fa-circle-check fs-4"></i>
+      <div className="col-2 p-0 d-flex justify-content-center align-items-center">
+        <div className="position-relative rounded-5 circle-checkbox d-flex justify-content-center align-items-center fw-bold">
+          <i className="fa-solid fa-check"></i>
+          <div
+            className="position-absolute w-100 h-100"
+            onClick={(e) => {
+              handleCheckedBackground(e);
+            }}
+          ></div>
+        </div>
       </div>
+
       <div className="col-10">
         <TaskRepeatInfo daysRepeat={namesRepeatDays} />
         <p className="fw-bolder">{task.title}</p>
