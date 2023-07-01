@@ -9,9 +9,9 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 function MainTaskList() {
-  const dateInSession =
-    dayjs(sessionStorage.getItem("dateInSession"), "DD/MM/YYYY") || null;
-  console.log(sessionStorage.getItem("dateInSession"));
+  const dateInSession = sessionStorage.getItem("dateInSession")
+    ? dayjs(sessionStorage.getItem("dateInSession"), "DD/MM/YYYY")
+    : null;
 
   const [date, setDate] = useState(dateInSession || dayjs().startOf("day"));
 

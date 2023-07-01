@@ -61,13 +61,13 @@ function SelectMonth({ date, newDate }) {
           {selectedMonth}
           <i className="fa-solid fa-caret-down ps-1"></i>
         </button>
-        <ul className="dropdown-menu p-0 bg-1">
+        <ul className="dropdown-menu dropdown-menu-dark p-0 bg-1 shadow">
           {monthList.map((month) => {
             return (
               <li
                 key={month.monthNumber}
                 onClick={selectMonth}
-                className={`dropdown-item bg-transparent ${
+                className={`dropdown-item ${
                   month.name === selectedMonth ? "d-none" : ""
                 }`}
               >
