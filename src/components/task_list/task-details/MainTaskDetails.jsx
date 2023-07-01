@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { getQueryParams } from "../../../utils/getQueryParams";
+import RepeatInfo from "./RepeatInfo";
 
 function MainTaskDetail() {
   const location = useLocation();
@@ -11,16 +12,6 @@ function MainTaskDetail() {
     const taskList = JSON.parse(localStorage.getItem("userTasks"));
     task = taskList.find((task) => task.id === taskId);
   }
-
-  const daysInWeek = [
-    { dayId: 1, name: "Lunes" },
-    { dayId: 2, name: "Martes" },
-    { dayId: 3, name: "Miércoles" },
-    { dayId: 4, name: "Jueves" },
-    { dayId: 5, name: "Viernes" },
-    { dayId: 6, name: "Sábado" },
-    { dayId: 7, name: "Domingo" },
-  ];
 
   return (
     <section className="px-3 py-2">
@@ -38,19 +29,8 @@ function MainTaskDetail() {
             </span>
           </p>
 
-          <div className="mt-4">
-            <h6>todos los días || no se repite || lista de ciertos días.</h6>
-            <ul className="d-flex justify-content-evenly">
-              {daysInWeek.map((day) => (
-                <li
-                  key={day.dayId}
-                  className="rounded-5 circle-checkbox d-flex justify-content-center align-items-center fw-bold"
-                >
-                  <p>{day.name[0]}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <RepeatInfo task={task} />
+
           {/* botones para editar y borrar */}
         </div>
       )}
