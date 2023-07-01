@@ -1,5 +1,6 @@
 import React from "react";
 import TaskRepeatInfo from "./TaskRepeatInfo";
+import { Link } from "react-router-dom";
 
 function TaskItem({ task }) {
   const namesRepeatDays = task.weekDaySelected.map((day) => day.checkboxName);
@@ -27,14 +28,14 @@ function TaskItem({ task }) {
         </div>
       </div>
 
-      <div className="col-10">
+      <Link to={`/tasklist/detail?task=${task.id}`} className="col-10">
         <TaskRepeatInfo daysRepeat={namesRepeatDays} />
         <p className="fw-bolder">{task.title}</p>
         <div className="d-flex justify-content-between">
           <p className="fs-7">{task.hour}</p>
           <p className="fs-7 pe-3">{task.genre}</p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
