@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getQueryParams } from "../../../utils/getQueryParams";
 import RepeatInfo from "./RepeatInfo";
 
@@ -12,9 +12,11 @@ function MainTaskDetail() {
     const taskList = JSON.parse(localStorage.getItem("userTasks"));
     task = taskList.find((task) => task.id === taskId);
   }
-
   return (
     <section className="px-3 py-2">
+      <Link to={"/tasklist"}>
+        <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
+      </Link>
       {task && (
         <div>
           <h2 className="fs-1 pt-2 mb-0 text-center">{task.title}</h2>

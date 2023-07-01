@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { validationsTaskForm } from "../../../validations/validationsTaskList";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
 import { getQueryParams } from "../../../utils/getQueryParams";
@@ -55,7 +55,10 @@ function MainTaskForm() {
 
   return (
     <section>
-      <form className="col-10 m-auto py-4">
+      <form className="m-auto py-2 px-4">
+        <Link to={"/tasklist"}>
+          <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
+        </Link>
         <label className="w-100 my-2">
           <input
             onChange={(e) => handleChanges(e)}

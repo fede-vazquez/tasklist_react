@@ -5,9 +5,16 @@ import SelectMonth from "./SelectMonth";
 import SelectedDate from "./SelectedDate";
 import dayjs from "dayjs";
 import AddTaskButton from "./AddTaskButton";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 function MainTaskList() {
-  const [date, setDate] = useState(dayjs());
+  const dateInSession =
+    dayjs(sessionStorage.getItem("dateInSession"), "DD/MM/YYYY") || null;
+  console.log(sessionStorage.getItem("dateInSession"));
+
+  const [date, setDate] = useState(dateInSession || dayjs().startOf("day"));
+
   const completeDateFormat = date.format("DD/MM/YYYY");
   const monthDateFormat = date.format("MM/YYYY");
 
@@ -16,6 +23,7 @@ function MainTaskList() {
 
     if (newDateFormat !== completeDateFormat) {
       setDate(newDateSelected);
+      sessionStorage.setItem("dateInSession", newDateFormat);
     }
   }
 
