@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getQueryParams } from "../../../utils/getQueryParams";
 import RepeatInfo from "./RepeatInfo";
+import ButtonsDeleteEdit from "./ButtonsDeleteEdit";
+import ConfirmDelete from "../../mainSection/ConfirmDelete";
 
 function MainTaskDetail() {
+  const [showAlert, setShowAlert] = useState(false);
+
   const location = useLocation();
   const { task: taskId } = getQueryParams(location.search, "task");
 
@@ -12,8 +16,20 @@ function MainTaskDetail() {
     const taskList = JSON.parse(localStorage.getItem("userTasks"));
     task = taskList.find((task) => task.id === taskId);
   }
+
   return (
     <section className="px-3 py-2">
+      {/* Confirmación de borrado de tarea */}
+      {showAlert && (
+        <ConfirmDelete
+          urlToRedirect={"/tasklist"}
+          array={JSON.parse(localStorage.getItem("userTasks"))}
+          idToRemove={task.id}
+          setShowAlert={setShowAlert}
+          message={`¿Seguro que quiere borrar "${task.title}"?`}
+        />
+      )}
+
       <Link to={"/tasklist"}>
         <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
       </Link>
@@ -34,6 +50,7 @@ function MainTaskDetail() {
           <RepeatInfo task={task} />
 
           {/* botones para editar y borrar */}
+          <ButtonsDeleteEdit task={task} setShowAlert={setShowAlert} />
         </div>
       )}
     </section>

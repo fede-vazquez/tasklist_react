@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { scrollToActiveItemX, getOffSet } from "../../utils/centerItemsInList";
 
 function SelectMonth({ date, newDate }) {
-  const dateFormat = date.format("DD/MM/YYY");
   const monthCapitalized =
     date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
   const selectedMonth = monthCapitalized;

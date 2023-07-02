@@ -1,6 +1,6 @@
 /* general */
 body {
-  color: white;
+  color: white !important;
 }
 a {
   color: unset;
@@ -72,8 +72,25 @@ p {
 /* Buttons */
 
 .btn-1 {
+  color: white;
   &:hover {
     background-color: #545454;
+  }
+}
+
+.edit-button {
+  background-color: #66b9bf;
+  &:hover {
+    background-color: #479398 !important;
+    border-color: #7cc3c8 !important;
+  }
+}
+
+.delete-button {
+  background-color: #e00031;
+  &:hover {
+    background-color: #bb0028 !important;
+    border-color: #e0627d !important;
   }
 }
 
@@ -119,6 +136,15 @@ p {
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
   }
+}
+
+/* Alert */
+
+.alert-custom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Animations */
