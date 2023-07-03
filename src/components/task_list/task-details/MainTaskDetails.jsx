@@ -42,9 +42,13 @@ function MainTaskDetail() {
 
           <p className="mt-4">
             Horario:
-            <span className="fs-xxl task_hour_text d-block lh-1">
-              {task.hour}
-            </span>
+            {task.allDay ? (
+              <span className="d-block fs-1">Todo el día</span>
+            ) : (
+              <span className="fs-xxl task_hour_text d-block lh-1">
+                {task.hour}
+              </span>
+            )}
           </p>
 
           <RepeatInfo task={task} />

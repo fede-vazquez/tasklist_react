@@ -32,7 +32,7 @@ function TaskItem({ task }) {
         <TaskRepeatInfo daysRepeat={namesRepeatDays} />
         <p className="fw-bolder">{task.title}</p>
         <div className="d-flex justify-content-between">
-          <p className="fs-7">{task.hour}</p>
+          <p className="fs-7">{task.allDay ? "Todo el día" : task.hour}</p>
           <p className="fs-7 pe-3">{task.genre}</p>
         </div>
       </Link>

@@ -14,7 +14,6 @@ function GenreInput({ handleChanges, handleBlur, form }) {
 
   function selectOption(taskName) {
     const fakeEvent = { target: { name: "genre", value: taskName } };
-    console.log(fakeEvent);
     handleChanges(fakeEvent);
   }
 
@@ -35,7 +34,7 @@ function GenreInput({ handleChanges, handleBlur, form }) {
           autoComplete="off"
         />
       </label>
-      {resultOptions.length != 0 && (
+      {resultOptions.length !== 0 && (
         <ul className="result-options-list rounded-bottom-2">
           {resultOptions.map((taskName, i) => {
             return (
