@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ButtonsDeleteEdit({ task, setShowAlert }) {
   function showDeleteAlert() {
@@ -16,7 +17,9 @@ function ButtonsDeleteEdit({ task, setShowAlert }) {
         <i className="fa-solid fs-2 text-white fa-trash"></i>
       </button>
       <button className="edit-button btn py-3 col-4">
-        <i className="fa-solid fs-2 text-white fa-pen-to-square"></i>
+        <Link to={`/tasklist/edit?task=${task.id}`}>
+          <i className="fa-solid fs-2 text-white fa-pen-to-square"></i>
+        </Link>
       </button>
     </div>
   );

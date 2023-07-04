@@ -6,20 +6,30 @@ import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
 import { getQueryParams } from "../../../utils/getQueryParams";
 import { saveData } from "../../../utils/saveData";
-
-const initialForm = {
-  title: "",
-  hour: "00:00",
-  description: "",
-  genre: "",
-  allDay: false,
-  weekDaySelected: [],
-};
+import { findItemInArray } from "../../../utils/findItemById";
+import { updateData } from "../../../utils/updateData";
 
 function MainTaskForm() {
-  const location = useLocation();
-  const params = getQueryParams(location.search, "date");
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = getQueryParams(location.search, ["date", "task"]);
+
+  let initialForm = {
+    title: "",
+    hour: "00:00",
+    description: "",
+    genre: "",
+    allDay: false,
+    weekDaySelected: [],
+  };
+
+  // Controlador para formulario de edición.
+  if (location.pathname.includes("/edit")) {
+    initialForm = findItemInArray(
+      params.task,
+      JSON.parse(localStorage.getItem("userTasks"))
+    );
+  }
 
   const {
     form,
@@ -31,26 +41,43 @@ function MainTaskForm() {
     onSubmit,
   } = useForm(initialForm, validationsTaskForm);
 
-  const [switchRender, setSetSwitchRender] = useState(false);
+  const [switchRender, setSwitchRender] = useState(false);
 
   function onSubmitAndRedirect() {
     onSubmit();
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
-      saveData("userTasks", {
-        title: form.title,
-        hour: form.hour,
-        description: form.description,
-        date: params.date,
-        genre: form.genre,
-        allDay: form.allDay,
-        weekDaySelected: form.weekDaySelected,
-      });
+      if (location.pathname.includes("/form")) {
+        saveData("userTasks", {
+          title: form.title,
+          hour: form.hour,
+          description: form.description,
+          date: params.date,
+          genre: form.genre,
+          allDay: form.allDay,
+          weekDaySelected: form.weekDaySelected,
+        });
+      }
+
+      // Lógica para actualizar la tarea.
+      if (location.pathname.includes("/edit")) {
+        updateData("userTasks", params.task, {
+          id: initialForm.id,
+          title: form.title,
+          hour: form.hour,
+          description: form.description,
+          date: initialForm.date,
+          genre: form.genre,
+          allDay: form.allDay,
+          weekDaySelected: form.weekDaySelected,
+        });
+      }
+
       navigate("/tasklist");
     }
     // Cambia el valor del estado "switchRender".
     // para volver a cargar el componente y lograr ver los mensajes de error.
-    setSetSwitchRender(!switchRender);
+    setSwitchRender(!switchRender);
   }
 
   return (

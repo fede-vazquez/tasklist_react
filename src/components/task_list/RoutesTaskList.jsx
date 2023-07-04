@@ -12,6 +12,7 @@ function MainTaskSection() {
       <Routes>
         <Route exact path="/" element={<MainTaskList />} />
         <Route exact path="/form" element={<MainTaskForm />} />
+        <Route exact path="/edit" element={<MainTaskForm />} />
         <Route exact path="/detail" element={<MainTaskDetail />} />
       </Routes>
     </div>
