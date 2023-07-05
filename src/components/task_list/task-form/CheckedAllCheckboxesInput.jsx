@@ -4,6 +4,7 @@ function CheckedAllCheckboxesInput({
   daysInWeek,
   handleCheckedBackground,
   handleMultipleCheckbox,
+  daysSelected,
 }) {
   function checkedAllCheckbox(e) {
     daysInWeek.forEach((day, i) => {
@@ -54,6 +55,7 @@ function CheckedAllCheckboxesInput({
         onChange={(e) => {
           checkedAllCheckbox(e);
         }}
+        checked={daysSelected.length === 7}
       />
     </div>
   );

@@ -22,7 +22,7 @@ function handleCheckedBackground(e) {
 }
 
 function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
-  const allDaysSelected = document.getElementById("task_check_repeat_all_days");
+  console.log(daysSelected);
 
   return (
     <div className="my-2">
@@ -31,7 +31,12 @@ function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
         {daysInWeek.map((day) => (
           <li
             key={day.dayId}
-            className="rounded-5 circle-checkbox d-flex justify-content-center align-items-center fw-bold"
+            className={`rounded-5 d-flex justify-content-center align-items-center fw-bold circle-checkbox
+            ${
+              daysSelected.some((daySelected) => daySelected.id === day.dayId)
+                ? "circle-checkbox-active"
+                : ""
+            }`}
           >
             <label htmlFor={`circle_checkbox_${day.name}`}>{day.name[0]}</label>
 
@@ -40,21 +45,23 @@ function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
               className="btn-check"
               customattribute={day.name}
               type="checkbox"
+              checked={daysSelected.some(
+                (daySelected) => daySelected.id === day.dayId
+              )}
               onChange={(e) => {
-                if (!allDaysSelected?.checked) {
-                  handleMultipleCheckbox(e, "weekDaySelected", day.dayId);
-                  handleCheckedBackground(e);
-                }
+                handleMultipleCheckbox(e, "weekDaySelected", day.dayId);
+                handleCheckedBackground(e);
               }}
             />
           </li>
         ))}
       </ul>
 
-      {daysSelected.length == 0 && <p className="ms-2">No se repite</p>}
+      {daysSelected.length === 0 && <p className="ms-2">No se repite</p>}
 
       <CheckedAllCheckboxesInput
         daysInWeek={daysInWeek}
+        daysSelected={daysSelected}
         handleCheckedBackground={handleCheckedBackground}
         handleMultipleCheckbox={handleMultipleCheckbox}
       />
