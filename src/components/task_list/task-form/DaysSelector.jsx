@@ -13,11 +13,10 @@ const daysInWeek = [
 
 function handleCheckedBackground(e) {
   const { checked } = e.target;
-  const containerInput = e.target.parentNode;
   if (checked) {
-    containerInput.classList.add("circle-checkbox-active");
+    e.target.classList.add("circle-checkbox-active");
   } else {
-    containerInput.classList.remove("circle-checkbox-active");
+    e.target.classList.remove("circle-checkbox-active");
   }
 }
 
@@ -29,16 +28,19 @@ function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
       <h2 className="fs-5">Días que se repite</h2>
       <ul className="d-flex justify-content-evenly">
         {daysInWeek.map((day) => (
-          <li
-            key={day.dayId}
-            className={`rounded-5 d-flex justify-content-center align-items-center fw-bold circle-checkbox
+          <li key={day.dayId}>
+            <label
+              htmlFor={`circle_checkbox_${day.name}`}
+              role="button"
+              className={`rounded-5 d-flex justify-content-center align-items-center fw-bold circle-checkbox
             ${
               daysSelected.some((daySelected) => daySelected.id === day.dayId)
                 ? "circle-checkbox-active"
                 : ""
             }`}
-          >
-            <label htmlFor={`circle_checkbox_${day.name}`}>{day.name[0]}</label>
+            >
+              {day.name[0]}
+            </label>
 
             <input
               id={`circle_checkbox_${day.name}`}
