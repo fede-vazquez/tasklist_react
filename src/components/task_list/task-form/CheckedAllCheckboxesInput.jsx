@@ -2,41 +2,35 @@ import React from "react";
 
 function CheckedAllCheckboxesInput({
   daysInWeek,
-  handleCheckedBackground,
   handleMultipleCheckbox,
   daysSelected,
 }) {
   function checkedAllCheckbox(e) {
+    const checkedAllCheckbox = e.target.checked;
+
     daysInWeek.forEach((day, i) => {
       const inputDay = document.getElementById(`circle_checkbox_${day.name}`);
 
       // En el caso de que los checked de inputDay y e.target estén activos,
       // hace un return temprano para que no se ejecute el código siguiente,
-      // para que no agregue nuevamente el mismo día.
-      if (inputDay.checked && e.target.checked) {
+      // para que no agregue nuevamente el mismo día..
+      if (inputDay.checked && checkedAllCheckbox) {
         return;
       }
 
-      // Si el check está activado, pone todo en true, en caso contrario lo coloca en false.
-      inputDay.checked = e.target.checked ? true : false;
-
-      // Crea un "evento" para que pueda las funciones puedan trabajar bien.
-      const fakeEvent = {
-        target: {
-          checked: inputDay.checked,
-          parentNode: inputDay.parentNode,
-          getAttribute: () => {
-            return day.name;
-          },
-        },
-      };
-
-      // Usa el handleChecked() para agregar o eliminar los días del form.
-      // y el color de fondo.
-      // El setTimeout es para una pequeña animación
+      // El setTimeout es para una pequeña animación.
       setTimeout(() => {
-        handleCheckedBackground(fakeEvent);
-        handleMultipleCheckbox(fakeEvent, "weekDaySelected", day.dayId);
+        // Si el check está activado, pone todo en true, en caso contrario lo coloca en false.
+        inputDay.checked = checkedAllCheckbox;
+
+        // Usa el handleChecked() para agregar o eliminar los días del form.
+        // y el color de fondo.
+        handleMultipleCheckbox(
+          inputDay,
+          "weekDaySelected",
+          day.dayId,
+          day.name
+        );
       }, 30 * i);
     });
   }

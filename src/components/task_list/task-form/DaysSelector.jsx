@@ -11,18 +11,7 @@ const daysInWeek = [
   { dayId: 7, name: "Domingo" },
 ];
 
-function handleCheckedBackground(e) {
-  const { checked } = e.target;
-  if (checked) {
-    e.target.classList.add("circle-checkbox-active");
-  } else {
-    e.target.classList.remove("circle-checkbox-active");
-  }
-}
-
 function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
-  console.log(daysSelected);
-
   return (
     <div className="my-2">
       <h2 className="fs-5">Días que se repite</h2>
@@ -51,8 +40,12 @@ function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
                 (daySelected) => daySelected.id === day.dayId
               )}
               onChange={(e) => {
-                handleMultipleCheckbox(e, "weekDaySelected", day.dayId);
-                handleCheckedBackground(e);
+                handleMultipleCheckbox(
+                  e.target,
+                  "weekDaySelected",
+                  day.dayId,
+                  day.name
+                );
               }}
             />
           </li>
@@ -64,7 +57,6 @@ function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
       <CheckedAllCheckboxesInput
         daysInWeek={daysInWeek}
         daysSelected={daysSelected}
-        handleCheckedBackground={handleCheckedBackground}
         handleMultipleCheckbox={handleMultipleCheckbox}
       />
     </div>

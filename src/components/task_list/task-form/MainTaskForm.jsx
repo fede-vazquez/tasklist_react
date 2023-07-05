@@ -23,8 +23,11 @@ function MainTaskForm() {
     weekDaySelected: [],
   };
 
+  // Si la url incluye "/edit" significa que es un formulario para editar.
+  const isEditForm = Boolean(location.pathname.includes("/edit"));
+
   // Controlador para formulario de edición.
-  if (location.pathname.includes("/edit")) {
+  if (isEditForm) {
     initialForm = findItemInArray(
       params.task,
       JSON.parse(localStorage.getItem("userTasks"))
@@ -47,7 +50,7 @@ function MainTaskForm() {
     onSubmit();
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
-      if (location.pathname.includes("/form")) {
+      if (!isEditForm) {
         saveData("userTasks", {
           title: form.title,
           hour: form.hour,
@@ -60,7 +63,7 @@ function MainTaskForm() {
       }
 
       // Lógica para actualizar la tarea.
-      if (location.pathname.includes("/edit")) {
+      if (isEditForm) {
         updateData("userTasks", params.task, {
           id: initialForm.id,
           title: form.title,
