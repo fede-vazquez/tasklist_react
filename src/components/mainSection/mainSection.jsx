@@ -1,35 +1,40 @@
 import React from "react";
+import PagePreviewCard from "./PagePreviewCard";
+import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 
 function MainSection() {
+  const pagesConfig = [
+    {
+      title: "Lista de tareas",
+      description:
+        "Lista de tareas por día, en esta página/app sera posible crear tareas por día.",
+      srcImg: "/previewPagesImages/tasklist_preview.png",
+      alt: "Lista de tareas",
+    },
+  ];
+
   return (
-    <nav className="navbar navbar-dark bg-2 navbar-expand-sm">
-      <div className="container-fluid">
-        <Link to={"/"} className="navbar-brand">
-          Home
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to={"/tasklist"} className="nav-link">
-                Task list
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <section>
+      <NavBar />
+      <ul className="p-4 row justify-content-center m-auto">
+        {pagesConfig &&
+          pagesConfig.map((page, i) => {
+            return (
+              <li key={page.title + i} className="col-11 col-sm-8 col-md-6">
+                <Link to={"/tasklist"}>
+                  <PagePreviewCard
+                    title={page.title}
+                    description={page.description}
+                    srcImg={page.srcImg}
+                    alt={page.alt}
+                  />
+                </Link>
+              </li>
+            );
+          })}
+      </ul>
+    </section>
   );
 }
 
