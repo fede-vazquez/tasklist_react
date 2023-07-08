@@ -10,7 +10,7 @@ export const validationsTaskForm = [
   {
     name: "genre",
     validation: (value) => {
-      return value.trim() != "";
+      return value.trim() !== "";
     },
     errorMessage: "Debe agregar un género.",
   },
