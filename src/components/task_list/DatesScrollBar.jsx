@@ -36,6 +36,21 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
         ref={containerListRef}
         className="overflow-x-scroll d-flex align-items-end"
       >
+        {/* prev month */}
+        <li
+          role="button"
+          onClick={() => {
+            selectNewDate(
+              dayjs()
+                .month(selectedMonth - 1)
+                .startOf("month")
+            );
+          }}
+          className="rounded-3 date-list-item d-flex justify-content-center align-items-center"
+        >
+          <i className="fa-solid fa-chevron-left fs-1"></i>
+        </li>
+
         {dates.map((date, i) => {
           return (
             <li
@@ -56,6 +71,20 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
             </li>
           );
         })}
+        {/* next month */}
+        <li
+          role="button"
+          onClick={() => {
+            selectNewDate(
+              dayjs()
+                .month(selectedMonth + 1)
+                .startOf("month")
+            );
+          }}
+          className="rounded-3 date-list-item d-flex justify-content-center align-items-center"
+        >
+          <i className="fa-solid fa-chevron-right fs-1"></i>
+        </li>
       </ul>
     </div>
   );

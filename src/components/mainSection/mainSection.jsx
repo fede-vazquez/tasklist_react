@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function MainSection() {
   const pagesConfig = [
     {
+      link: "/tasklist",
       title: "Lista de tareas",
       description:
         "Lista de tareas por día, en esta página/app sera posible crear tareas por día.",
@@ -22,7 +23,7 @@ function MainSection() {
           pagesConfig.map((page, i) => {
             return (
               <li key={page.title + i} className="col-11 col-sm-8 col-md-6">
-                <Link to={"/tasklist"}>
+                <Link to={page.link}>
                   <PagePreviewCard
                     title={page.title}
                     description={page.description}
