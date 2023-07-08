@@ -20,7 +20,13 @@ function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">{/* Próximamente irán opciones. */}</ul>
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link to={"/tasklist/allTasks"} className="nav-link">
+                Todas las tareas
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
