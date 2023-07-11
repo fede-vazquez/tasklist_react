@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const collapseNavBar = document.getElementById("taskListNavbarDropdown");
+
 function NavBar() {
+  function hideDropdownList() {
+    collapseNavBar.classList.remove("show");
+  }
+
   return (
     <nav className="navbar navbar-dark bg-2 navbar-expand-sm">
       <div className="container-fluid">
@@ -12,17 +18,22 @@ function NavBar() {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#taskListNavbarDropdown"
+          aria-controls="taskListNavbarDropdown"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="taskListNavbarDropdown">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to={"/tasklist/allTasks"} className="nav-link">
+            <li
+              className="nav-item"
+              onClick={() => {
+                hideDropdownList();
+              }}
+            >
+              <Link to={"/tasklist/allTasks"} className="dropdown-item">
                 Todas las tareas
               </Link>
             </li>
