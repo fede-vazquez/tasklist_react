@@ -8,7 +8,7 @@ const daysInWeek = [
   { dayId: 4, name: "Jueves" },
   { dayId: 5, name: "Viernes" },
   { dayId: 6, name: "Sábado" },
-  { dayId: 7, name: "Domingo" },
+  { dayId: 0, name: "Domingo" },
 ];
 
 function DaysSelector({ handleMultipleCheckbox, daysSelected }) {
