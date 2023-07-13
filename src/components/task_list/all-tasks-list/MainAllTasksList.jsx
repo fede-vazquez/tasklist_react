@@ -7,7 +7,7 @@ function MainAllTasksList() {
 
   const [filters, setFilters] = useState({
     title: "",
-    genre: "no genre name",
+    genre: "",
   });
 
   // Modificamos el valor de "filterTasks" solo si se modifican "filters" o "task".
@@ -19,20 +19,23 @@ function MainAllTasksList() {
 
       // Filtramos el array de tasks y guardamos el resultado en "newFilterTasksList".
       let newFilterTasksList = tasks.filter((task) => {
-        let include = false;
+        // Creamos array que guardará los resultados de cada filtro.
+        let results = [];
 
         // Recorremos el "filterName" verificando si alguno de los atributos de la lista
         // de tasks incluye el valor del atributo dentro del objeto de "filters".
         filtersName.forEach((filterName) => {
-          // Para evitar reescribir el valor de include, utilizamos un if.
-          if (!include) {
-            // Agregando la función "toLowerCase" para que no sea necesario respetar las mayúsculas.
-            include = task[filterName]
+          // Agregando la función "toLowerCase" para que no sea necesario respetar las mayúsculas.
+          // Agrega el resultado "true" o "false" dependiendo de si lo incluye o no.
+          results.push(
+            task[filterName]
               ?.toLowerCase()
-              .includes(filters[filterName].toLowerCase());
-          }
+              .includes(filters[filterName].toLowerCase())
+          );
         });
-        return include;
+
+        // Si incluye un false, devuelve false, para que no se incluya en el filtro.
+        return !results.includes(false);
       });
 
       // Retornamos el nuevo valor.
@@ -70,3 +73,15 @@ function MainAllTasksList() {
 }
 
 export default MainAllTasksList;
+
+//   let newFilterTasksList = tasks.filter((task) => {
+//     const filterTitle = task.title
+//       ?.toLowerCase()
+//       .includes(filters.title.toLowerCase());
+
+//     const filterGenre = task.genre
+//       ?.toLowerCase()
+//       .includes(filters.genre.toLowerCase());
+
+//     return filterTitle && filterGenre;
+//   });

@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const collapseNavBar = document.getElementById("taskListNavbarDropdown");
-
 function NavBar() {
   function hideDropdownList() {
+    const collapseNavBar = document.getElementById("taskListNavbarDropdown");
     collapseNavBar.classList.remove("show");
   }
 
