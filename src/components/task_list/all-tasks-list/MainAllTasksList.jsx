@@ -13,7 +13,7 @@ function MainAllTasksList() {
   // Modificamos el valor de "filterTasks" solo si se modifican "filters" o "task".
   const filterTasks = useMemo(() => {
     // Si existen filtros, filtramos la lista de tareas dependiendo de los filtros.
-    if (filters && Object.keys(filters).length >= 0) {
+    if (filters && Object.keys(filters).length >= 0 && tasks) {
       // Tomamos los nombres de cada atributo que tendrá el objeto de "filters".
       const filtersName = Object.keys(filters);
 
