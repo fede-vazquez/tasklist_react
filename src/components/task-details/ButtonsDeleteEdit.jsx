@@ -17,7 +17,7 @@ function ButtonsDeleteEdit({ task, setShowAlert }) {
         <i className="fa-solid fs-2 text-white fa-trash"></i>
       </button>
       <button className="edit-button btn py-3 col-4">
-        <Link to={`/tasklist/edit?task=${task.id}`}>
+        <Link to={`/edit?task=${task.id}`}>
           <i className="w-100 h-100 fa-solid fs-2 text-white fa-pen-to-square"></i>
         </Link>
       </button>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { getQueryParams } from "../../../utils/getQueryParams";
+import { getQueryParams } from "../../utils/getQueryParams";
 import RepeatInfo from "./RepeatInfo";
 import ButtonsDeleteEdit from "./ButtonsDeleteEdit";
-import ConfirmDelete from "../../mainSection/ConfirmDelete";
+import ConfirmDelete from "../ConfirmDelete";
 
 function MainTaskDetail() {
   const [showAlert, setShowAlert] = useState(false);
@@ -22,7 +22,7 @@ function MainTaskDetail() {
       {/* Confirmación de borrado de tarea */}
       {showAlert && (
         <ConfirmDelete
-          urlToRedirect={"/tasklist"}
+          urlToRedirect={"/"}
           array={JSON.parse(localStorage.getItem("userTasks"))}
           idToRemove={task.id}
           setShowAlert={setShowAlert}
@@ -30,7 +30,7 @@ function MainTaskDetail() {
         />
       )}
 
-      <Link to={"/tasklist"}>
+      <Link to={"/"}>
         <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
       </Link>
       {task && (

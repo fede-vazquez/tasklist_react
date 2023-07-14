@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteItemById } from "../../utils/deleteItemById";
+import { deleteItemById } from "../utils/deleteItemById";
 import { useNavigate } from "react-router-dom";
 
 const AlertComponent = ({

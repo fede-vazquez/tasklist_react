@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { scrollToActiveItemX, getOffSet } from "../../utils/centerItemsInList";
+import { scrollToActiveItemX, getOffSet } from "../utils/centerItemsInList";
 
 function SelectMonth({ date, newDate }) {
   const monthCapitalized =

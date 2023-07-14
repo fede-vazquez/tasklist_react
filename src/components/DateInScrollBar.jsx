@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { getOffSet, scrollToActiveItemX } from "../../utils/centerItemsInList";
+import { getOffSet, scrollToActiveItemX } from "../utils/centerItemsInList";
 
 function DateInScrollBar({ date, newDate }) {
   const dateAbbreviation = date.format("ddd");

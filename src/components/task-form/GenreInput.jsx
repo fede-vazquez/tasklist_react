@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { search } from "../../../utils/filterArray";
+import { search } from "../../utils/filterArray";
 
 function GenreInput({ handleChanges, handleBlur, form }) {
   // Más adelante esta variable traerá información del localStorage.

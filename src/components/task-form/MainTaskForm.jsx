@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useForm } from "../../../hooks/useForm";
-import { validationsTaskForm } from "../../../validations/validationsTaskList";
+import { useForm } from "../../hooks/useForm";
+import { validationsTaskForm } from "../../validations/validationsTaskList";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
-import { getQueryParams } from "../../../utils/getQueryParams";
-import { saveData } from "../../../utils/saveData";
-import { findItemInArray } from "../../../utils/findItemById";
-import { updateData } from "../../../utils/updateData";
+import { getQueryParams } from "../../utils/getQueryParams";
+import { saveData } from "../../utils/saveData";
+import { findItemInArray } from "../../utils/findItemById";
+import { updateData } from "../../utils/updateData";
 
 function MainTaskForm() {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ function MainTaskForm() {
         });
       }
 
-      navigate("/tasklist");
+      navigate("/");
     }
     // Cambia el valor del estado "switchRender".
     // para volver a cargar el componente y lograr ver los mensajes de error.
@@ -86,7 +86,7 @@ function MainTaskForm() {
   return (
     <section>
       <form className="m-auto py-2 px-4">
-        <Link to={"/tasklist"}>
+        <Link to={"/"}>
           <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
         </Link>
         <label className="w-100 my-2">
@@ -158,7 +158,7 @@ function MainTaskForm() {
         </label>
 
         <div
-          to={"/tasklist"}
+          to={"/"}
           onClick={() => onSubmitAndRedirect(form)}
           role="button"
           className="text-center my-3"

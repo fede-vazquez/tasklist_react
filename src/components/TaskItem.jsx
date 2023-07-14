@@ -6,7 +6,7 @@ function TaskItem({ task }) {
   const namesRepeatDays = task.weekDaySelected.map((day) => day.checkboxName);
 
   return (
-    <Link to={`/tasklist/detail?task=${task.id}`} className="col-10">
+    <Link to={`/detail?task=${task.id}`} className="col-10">
       <TaskRepeatInfo daysRepeat={namesRepeatDays} />
       <p className="fw-bolder">{task.title}</p>
       <div className="d-flex justify-content-between">
