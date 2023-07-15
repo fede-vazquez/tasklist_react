@@ -28,29 +28,31 @@ function MainTaskList() {
   }
 
   return (
-    <div>
-      <SelectMonth
-        key={"SelectedMonth" + completeDateFormat}
-        date={date}
-        newDate={newDate}
-      />
+    <section className="row m-auto container-lg p-0 mt-lg-5">
+      <article className="p-0 col-md-4">
+        <SelectMonth
+          key={"SelectedMonth" + completeDateFormat}
+          date={date}
+          newDate={newDate}
+        />
+        <DatesScrollBar
+          key={"DatesScrollBar" + monthDateFormat}
+          selectedMonth={date.month()}
+          dateSelected={date}
+          newDate={newDate}
+        />
 
-      <DatesScrollBar
-        key={"DatesScrollBar" + monthDateFormat}
-        selectedMonth={date.month()}
-        dateSelected={date}
-        newDate={newDate}
-      />
+        <SelectedDate
+          key={"SelectedDate" + completeDateFormat}
+          dateSelected={date}
+        />
+      </article>
 
-      <SelectedDate
-        key={"SelectedDate" + completeDateFormat}
-        dateSelected={date}
-      />
-
-      <DateTaskList date={date} />
-
+      <article className="p-0 px-md-2 px-lg-4 col-md-8 mt-md-5">
+        <DateTaskList date={date} />
+      </article>
       <AddTaskButton dateSelected={completeDateFormat} />
-    </div>
+    </section>
   );
 }
 

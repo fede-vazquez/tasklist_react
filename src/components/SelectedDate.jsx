@@ -39,7 +39,7 @@ function SelectedDate({ dateSelected }) {
   }
 
   return (
-    <div className="ps-3 py-2">
+    <div className="ps-3 py-2 text-md-center">
       <p>
         {dateSelected} - <span>{daysToThatDate}</span>
       </p>

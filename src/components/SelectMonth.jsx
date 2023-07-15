@@ -48,9 +48,9 @@ function SelectMonth({ date, newDate }) {
   }
 
   return (
-    <section className="d-flex justify-content-between ">
+    <article className="d-flex justify-content-between mx-3">
       {/* selector para seleccionar el més al que se quiere ir */}
-      <div className="dropdown">
+      <div className="dropdown bg-2 rounded-5 my-2">
         <button
           className="btn btn-secondary bg-transparent border-0"
           type="button"
@@ -79,13 +79,13 @@ function SelectMonth({ date, newDate }) {
       {/* botón para llevar al día actual */}
       <button
         onClick={dateNow}
-        className="btn btn-secondary bg-transparent border-0"
+        className="btn btn-secondary border-0 bg-2 rounded-5 my-2"
         type="button"
         aria-expanded="false"
       >
         hoy
       </button>
-    </section>
+    </article>
   );
 }
 
