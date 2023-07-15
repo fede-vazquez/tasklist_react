@@ -38,7 +38,7 @@ function DateTaskList({ date }) {
     <div className="bg-2 h-100 d-flex align-items-center justify-content-center">
       {tasks ? (
         dateTasks.length !== 0 ? (
-          <ul>
+          <ul className="w-100">
             {dateTasks.map((task, i) => {
               return (
                 <li
