@@ -36,28 +36,34 @@ function DateTaskList({ date }) {
 
   return (
     <div className="bg-2">
-      {tasks && (
-        <ul>
-          {dateTasks.map((task, i) => {
-            return (
-              <li
-                key={task.id + "" + i}
-                className="row m-0 border border-start-0 border-end-0 py-1 justify-content-center align-items-center"
-              >
-                <div className="rounded-5 position-relative circle-checkbox d-flex justify-content-center align-items-center fw-bold">
-                  <i className="fa-solid fa-check"></i>
-                  <div
-                    className="position-absolute w-100 h-100"
-                    onClick={(e) => {
-                      handleCheckedBackground(e);
-                    }}
-                  ></div>
-                </div>
-                <TaskItem task={task} />
-              </li>
-            );
-          })}
-        </ul>
+      {tasks ? (
+        dateTasks.length !== 0 ? (
+          <ul>
+            {dateTasks.map((task, i) => {
+              return (
+                <li
+                  key={task.id + "" + i}
+                  className="row m-0 border border-start-0 border-end-0 py-1 justify-content-center align-items-center"
+                >
+                  <div className="rounded-5 position-relative circle-checkbox d-flex justify-content-center align-items-center fw-bold">
+                    <i className="fa-solid fa-check"></i>
+                    <div
+                      className="position-absolute w-100 h-100"
+                      onClick={(e) => {
+                        handleCheckedBackground(e);
+                      }}
+                    ></div>
+                  </div>
+                  <TaskItem task={task} />
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="text-center fs-3 py-3">No hay tareas para este día.</p>
+        )
+      ) : (
+        <p className="text-center fs-3 py-3">Todavía no creaste tareas.</p>
       )}
     </div>
   );
