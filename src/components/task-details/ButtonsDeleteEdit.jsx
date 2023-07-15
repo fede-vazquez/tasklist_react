@@ -7,7 +7,7 @@ function ButtonsDeleteEdit({ task, setShowAlert }) {
   }
 
   return (
-    <div className="row justify-content-evenly mt-4">
+    <div className="row justify-content-evenly mt-4 mx-0">
       <button
         className="delete-button btn py-3 col-4"
         onClick={(e) => {

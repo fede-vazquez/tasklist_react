@@ -35,7 +35,7 @@ function DateTaskList({ date }) {
   }
 
   return (
-    <div className="bg-2">
+    <div className="bg-2 h-100 d-flex align-items-center justify-content-center">
       {tasks ? (
         dateTasks.length !== 0 ? (
           <ul>
@@ -60,10 +60,10 @@ function DateTaskList({ date }) {
             })}
           </ul>
         ) : (
-          <p className="text-center fs-3 py-3">No hay tareas para este día.</p>
+          <p className="fs-3 py-3">No hay tareas para este día.</p>
         )
       ) : (
-        <p className="text-center fs-3 py-3">Todavía no creaste tareas.</p>
+        <p className="fs-3 py-3">Todavía no creaste tareas.</p>
       )}
     </div>
   );

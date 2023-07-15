@@ -84,10 +84,13 @@ function MainTaskForm() {
   }
 
   return (
-    <section>
+    <section className="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mt-md-5">
       <form className="m-auto py-2 px-4">
-        <Link to={"/"}>
-          <i className="fa-solid fa-chevron-left fs-5 pt-2 ps-1"></i>
+        <Link
+          to={"/"}
+          className="mx-2 mx-md-0 mt-5 bg-2 px-4 py-3 btn-1 rounded-5"
+        >
+          <i className="fa-solid fa-chevron-left fs-5 my-3"></i>
         </Link>
         <label className="w-100 my-2">
           <input

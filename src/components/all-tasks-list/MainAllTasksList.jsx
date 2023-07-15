@@ -47,41 +47,32 @@ function MainAllTasksList() {
   }, [filters, tasks]);
 
   return (
-    <section>
-      <FiltersSection setFilters={setFilters} filters={filters} />
+    <section className="row container-lg m-auto mt-md-5 px-0">
+      <article className="col-md-4">
+        <h3 className="ps-3 py-1">Filtros</h3>
+        <FiltersSection setFilters={setFilters} filters={filters} />
+      </article>
 
-      {filterTasks?.length >= 1 ? (
-        <article>
-          <ul className="bg-2">
+      <article className="bg-2 col-md-8 mt-md-2 p-0 d-flex justify-content-center align-items-center">
+        {filterTasks?.length >= 1 ? (
+          <ul className="w-100">
             {filterTasks.map((task, i) => {
               return (
                 <li
                   key={task.id}
-                  className="row m-0 border border-start-0 border-end-0 py-2 justify-content-center align-items-center"
+                  className="row m-0 border border-start-0 border-end-0 py-2 justify-content-center align-items-center "
                 >
                   <TaskItem task={task} />
                 </li>
               );
             })}
           </ul>
-        </article>
-      ) : (
-        <p className="p-2 fs-3">No hay tareas...</p>
-      )}
+        ) : (
+          <p className="py-4 fs-3">No se encontraron tareas...</p>
+        )}
+      </article>
     </section>
   );
 }
 
 export default MainAllTasksList;
-
-//   let newFilterTasksList = tasks.filter((task) => {
-//     const filterTitle = task.title
-//       ?.toLowerCase()
-//       .includes(filters.title.toLowerCase());
-
-//     const filterGenre = task.genre
-//       ?.toLowerCase()
-//       .includes(filters.genre.toLowerCase());
-
-//     return filterTitle && filterGenre;
-//   });
