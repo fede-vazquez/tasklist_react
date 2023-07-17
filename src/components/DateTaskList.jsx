@@ -1,5 +1,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
+import { saveData } from "../utils/saveData";
+import { deleteItemById } from "../utils/deleteItemById";
 
 function DateTaskList({ date }) {
   const dateCompleteFormat = date.format("DD/MM/YYYY");
@@ -25,12 +27,39 @@ function DateTaskList({ date }) {
     });
   }
 
-  function handleCheckedBackground(e) {
+  // Función principal que maneja la activación o desactivación de un check.
+  function handleChecked(e, taskId) {
     const containerInput = e.target.parentNode;
     if (!containerInput.classList.contains("circle-checkbox-active")) {
       containerInput.classList.add("circle-checkbox-active");
+      saveCompleteTask(taskId);
     } else {
       containerInput.classList.remove("circle-checkbox-active");
+      removeCompleteTask(taskId);
+    }
+  }
+
+  // Guarda la tarea completa en el localStorage
+  function saveCompleteTask(taskId) {
+    const dataToSave = {
+      taskId: taskId,
+      date: dateCompleteFormat,
+    };
+    saveData("completeTasks", dataToSave);
+  }
+
+  // Elimina la tarea completa del localStorage
+  function removeCompleteTask(taskId) {
+    const completeTasks = localStorage.completeTasks
+      ? JSON.parse(localStorage.completeTasks)
+      : false;
+
+    if (completeTasks) {
+      const taskCompleteToRemove = completeTasks.find(
+        (taskComplete) => taskComplete.taskId === taskId
+      );
+
+      deleteItemById(taskCompleteToRemove.id, completeTasks, "completeTasks");
     }
   }
 
@@ -53,7 +82,7 @@ function DateTaskList({ date }) {
                     <div
                       className="position-absolute w-100 h-100"
                       onClick={(e) => {
-                        handleCheckedBackground(e);
+                        handleChecked(e, task.id);
                       }}
                     ></div>
                   </div>
