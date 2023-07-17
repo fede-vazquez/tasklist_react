@@ -35,7 +35,10 @@ function DateTaskList({ date }) {
   }
 
   return (
-    <div className="bg-2 h-100 d-flex align-items-center justify-content-center">
+    <div
+      className={`bg-2 d-flex align-items-center justify-content-center
+    ${dateTasks?.length === 0 && " h-100"}`}
+    >
       {tasks ? (
         dateTasks.length !== 0 ? (
           <ul className="w-100">
