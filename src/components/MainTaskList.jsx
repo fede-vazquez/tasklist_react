@@ -49,7 +49,7 @@ function MainTaskList() {
       </article>
 
       <article className="p-0 px-md-2 px-lg-4 col-md-8 mt-md-5">
-        <DateTaskList date={date} />
+        <DateTaskList date={date} key={"TasksToDate_" + completeDateFormat} />
       </article>
       <AddTaskButton dateSelected={completeDateFormat} />
     </section>
