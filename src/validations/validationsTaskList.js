@@ -1,3 +1,6 @@
+/**
+ * Array que contiene las validaciones del formulario de creación de tareas.
+ */
 export const validationsTaskForm = [
   {
     name: "title",
