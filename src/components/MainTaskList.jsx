@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DateTaskList from "./DateTaskList";
+import DateTasksList from "./task-list/DateTasks";
 import DatesScrollBar from "./DatesScrollBar";
 import SelectMonth from "./SelectMonth";
 import SelectedDate from "./SelectedDate";
@@ -49,7 +49,7 @@ function MainTaskList() {
       </article>
 
       <article className="p-0 px-md-2 px-lg-4 col-md-8 mt-md-5">
-        <DateTaskList date={date} key={"TasksToDate_" + completeDateFormat} />
+        <DateTasksList date={date} key={"TasksToDate_" + completeDateFormat} />
       </article>
       <AddTaskButton dateSelected={completeDateFormat} />
     </section>
