@@ -48,7 +48,6 @@ function DayContextProvider({ children }) {
   useEffect(() => {
     setDateSelectedFormats(getDateFormats(dateSelected));
   }, [dateSelected]);
-  console.log(dateSelectedFormats);
   return (
     <DayContext.Provider value={{ dateSelectedFormats, updateDate }}>
       {children}

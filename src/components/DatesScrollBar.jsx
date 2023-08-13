@@ -3,14 +3,21 @@ import DateInScrollBar from "./DateInScrollBar";
 
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+import useDayContext from "../hooks/useDayContext";
 dayjs.locale("es");
 
-function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
-  const containerListRef = useRef(null);
+function DatesScrollBar() {
+  const containerListRef = useRef();
+
+  const { dateSelectedFormats, updateDate } = useDayContext();
 
   // Saca el primer y ultimo día del més actual
-  const startMonth = dayjs().month(selectedMonth).startOf("month");
-  const endMonth = dayjs().month(selectedMonth).endOf("month");
+  const startMonth = dayjs()
+    .month(dateSelectedFormats.monthNumber - 1)
+    .startOf("month");
+  const endMonth = dayjs()
+    .month(dateSelectedFormats.monthNumber - 1)
+    .endOf("month");
 
   // Variable que irá cambiando, con el valor inicial del més actual
   let oneDay = startMonth;
@@ -26,7 +33,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
   }
 
   function selectNewDate(newDateSelected) {
-    newDate(newDateSelected);
+    updateDate(newDateSelected);
   }
 
   return (
@@ -41,9 +48,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
           role="button"
           onClick={() => {
             selectNewDate(
-              dayjs()
-                .month(selectedMonth - 1)
-                .startOf("month")
+              dayjs().month(dateSelectedFormats.monthNumber).startOf("month")
             );
           }}
           className="rounded-3 date-list-item d-flex justify-content-center align-items-center"
@@ -58,7 +63,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
               key={date.format("dddd") + i}
               className={`rounded-3 date-list-item 
               ${
-                dateSelected.date() === date.date()
+                dateSelectedFormats.complete === date.format("DD/MM/YYYY")
                   ? "active-date-item bg-2 h-100"
                   : ""
               }`}
@@ -77,7 +82,7 @@ function DatesScrollBar({ selectedMonth, dateSelected, newDate }) {
           onClick={() => {
             selectNewDate(
               dayjs()
-                .month(selectedMonth + 1)
+                .month(dateSelectedFormats.monthNumber + 1)
                 .startOf("month")
             );
           }}

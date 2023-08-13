@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import dayjs from "dayjs";
 import { scrollToActiveItemX, getOffSet } from "../utils/centerItemsInList";
+import { DayContext } from "../contexts/DayContext";
 
-function SelectMonth({ date, newDate }) {
-  const monthCapitalized =
-    date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1);
-  const selectedMonth = monthCapitalized;
-
+function SelectMonth() {
   const monthList = [
     { monthNumber: 1, name: "Enero" },
     { monthNumber: 2, name: "Febrero" },
@@ -21,6 +18,7 @@ function SelectMonth({ date, newDate }) {
     { monthNumber: 11, name: "Noviembre" },
     { monthNumber: 12, name: "Diciembre" },
   ];
+  const { updateDate, dateSelectedFormats } = useContext(DayContext);
 
   const selectMonth = (e) => {
     const selectedMonthObjet = monthList.find(
@@ -31,11 +29,11 @@ function SelectMonth({ date, newDate }) {
       .month(selectedMonthObjet.monthNumber - 1)
       .set("date", 1);
 
-    newDate(newDateSelected);
+    updateDate(newDateSelected);
   };
 
   function dateNow() {
-    newDate(dayjs());
+    updateDate(dayjs());
 
     // Centra el día actual
     setTimeout(() => {
@@ -57,7 +55,7 @@ function SelectMonth({ date, newDate }) {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {selectedMonth}
+          {dateSelectedFormats.monthName}
           <i className="fa-solid fa-caret-down ps-1"></i>
         </button>
         <ul className="dropdown-menu dropdown-menu-dark p-0 bg-1 shadow">
@@ -67,7 +65,7 @@ function SelectMonth({ date, newDate }) {
                 key={month.monthNumber}
                 onClick={selectMonth}
                 className={`dropdown-item ${
-                  month.name === selectedMonth ? "d-none" : ""
+                  month.name === dateSelectedFormats.monthName ? "d-none" : ""
                 }`}
               >
                 {month.name}
