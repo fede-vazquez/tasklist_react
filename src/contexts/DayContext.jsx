@@ -6,6 +6,18 @@ dayjs.locale("es");
 
 const DayContext = createContext();
 
+const getDateFormats = (date) => {
+  return {
+    complete: date.format("DD/MM/YYYY"),
+    monthYear: date.format("MM/YYYY"),
+    monthName:
+      date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1),
+    monthNumber: date.format("M"),
+    dayAbbreviation: date.format("ddd"),
+    dayNumber: date.format("D"),
+  };
+};
+
 /**
  * Contexto de la fecha que se esta viendo.
  */
@@ -17,11 +29,9 @@ function DayContextProvider({ children }) {
     dayjs(dateInSessionStorage, "DD/MM/YYYY")
   );
 
-  const [dateSelectedFormats, setDateSelectedFormats] = useState({
-    complete: "",
-    monthYear: "",
-    monthName: "",
-  });
+  const [dateSelectedFormats, setDateSelectedFormats] = useState(
+    getDateFormats(dateSelected)
+  );
 
   /**
    * Función que cambia la fecha en el estado y en la sesión.
@@ -36,14 +46,9 @@ function DayContextProvider({ children }) {
   }
 
   useEffect(() => {
-    setDateSelectedFormats({
-      complete: dateSelected.format("DD/MM/YYYY"),
-      monthYear: dateSelected.format("MM/YYYY"),
-      monthName:
-        dateSelected.format("MMMM")[0].toUpperCase() +
-        dateSelected.format("MMMM").slice(1),
-    });
+    setDateSelectedFormats(getDateFormats(dateSelected));
   }, [dateSelected]);
+  console.log(dateSelectedFormats);
   return (
     <DayContext.Provider value={{ dateSelectedFormats, updateDate }}>
       {children}
