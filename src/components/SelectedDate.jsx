@@ -1,14 +1,20 @@
+import React, { useContext } from "react";
 import dayjs from "dayjs";
-import React from "react";
+import { DayContext } from "../contexts/DayContext";
 
-function SelectedDate({ dateSelected }) {
-  // función para tomar los días entre las fechas.
+/**
+ * Componente que muestra información del día seleccionado.
+ */
+function SelectedDate() {
+  const { complete: dateCompleteFormat } =
+    useContext(DayContext).dateSelectedFormats;
+
+  // Saca la diferencia de días entre el día seleccionado y el día actual.
   const dateNow = dayjs().startOf("day");
-  const dayDiff = dateSelected.startOf("day").diff(dateNow, "day");
-  dateSelected = dateSelected.format("DD/MM/YYYY");
+  const dayDiff = dayjs(dateCompleteFormat, "DD/MM/YYYY").diff(dateNow, "day");
 
   let daysToThatDate;
-
+  // Condicionales para mostrar una u otra información dependiendo del resultado de la diferencia de días.
   if (dayDiff < 0) {
     switch (dayDiff) {
       case -1:
@@ -41,7 +47,7 @@ function SelectedDate({ dateSelected }) {
   return (
     <div className="ps-3 py-2 text-md-center">
       <p>
-        {dateSelected} - <span>{daysToThatDate}</span>
+        {dateCompleteFormat} - <span>{daysToThatDate}</span>
       </p>
     </div>
   );

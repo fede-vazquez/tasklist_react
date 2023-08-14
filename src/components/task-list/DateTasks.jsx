@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import TaskList from "./TaskList";
+import { DayContext } from "../../contexts/DayContext";
 
-function DateTaskList({ date }) {
-  const dateCompleteFormat = date.format("DD/MM/YYYY");
-  const dayNumber = Number(date.format("d"));
-  // Maqueta de como se verán las tareas en el local storage.
+/**
+ * Componente que carga la lista de tareas del día seleccionado.
+ */
+function DateTaskList() {
   const tasks = localStorage.userTasks
     ? JSON.parse(localStorage.userTasks)
     : false;
 
+  const { weekDayNumber, complete: dateCompleteFormat } =
+    useContext(DayContext).dateSelectedFormats;
+
   let dateTasks;
+  // Condición para filtrar las tareas del día si es que existen.
   if (tasks) {
     dateTasks = tasks.filter((task) => {
       // Si la tarea se repite este día.
       const taskRepeatToday = task.weekDaySelected.some(
-        (day) => day.id === dayNumber
+        (day) => day.id === Number(weekDayNumber)
       );
 
       // Si la tarea no se repite, pero es el mismo día.

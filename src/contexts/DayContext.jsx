@@ -14,7 +14,7 @@ const getDateFormats = (date) => {
       date.format("MMMM")[0].toUpperCase() + date.format("MMMM").slice(1),
     monthNumber: date.format("M"),
     dayAbbreviation: date.format("ddd"),
-    dayNumber: date.format("D"),
+    weekDayNumber: date.format("d"),
   };
 };
 

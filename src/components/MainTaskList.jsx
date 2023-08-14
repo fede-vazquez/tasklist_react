@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import DateTasksList from "./task-list/DateTasks";
 import DatesScrollBar from "./DatesScrollBar";
 import SelectMonth from "./SelectMonth";
@@ -11,43 +11,23 @@ dayjs.extend(customParseFormat);
 
 function MainTaskList() {
   // Tomamos los formatos del día del DayContext.
-  const { dateSelectedFormats } = useDayContext();
-
-  const dateInSession = sessionStorage.getItem("dateInSession")
-    ? dayjs(sessionStorage.getItem("dateInSession"), "DD/MM/YYYY")
-    : null;
-
-  const [date, setDate] = useState(dateInSession || dayjs().startOf("day"));
-
-  function newDate(newDateSelected) {
-    const newDateFormat = newDateSelected.format("DD/MM/YYYY");
-
-    if (newDateFormat !== dateSelectedFormats.complete) {
-      setDate(newDateSelected);
-      sessionStorage.setItem("dateInSession", newDateFormat);
-    }
-  }
+  const { complete: completeDateFormat, monthYear: monthYearFormat } =
+    useDayContext().dateSelectedFormats;
 
   return (
     <section className="row m-auto container-lg p-0 mt-lg-5">
       <article className="p-0 col-md-4">
-        <SelectMonth key={"SelectedMonth" + dateSelectedFormats.complete} />
+        <SelectMonth key={"SelectedMonth" + completeDateFormat} />
 
-        <DatesScrollBar key={"DatesScrollBar" + dateSelectedFormats.month} />
+        <DatesScrollBar key={"DatesScrollBar" + monthYearFormat} />
 
-        <SelectedDate
-          key={"SelectedDate" + dateSelectedFormats.complete}
-          dateSelected={date}
-        />
+        <SelectedDate key={"SelectedDate" + completeDateFormat} />
       </article>
 
       <article className="p-0 px-md-2 px-lg-4 col-md-8 mt-md-5">
-        <DateTasksList
-          date={date}
-          key={"TasksToDate_" + dateSelectedFormats.complete}
-        />
+        <DateTasksList key={"TasksToDate_" + completeDateFormat} />
       </article>
-      <AddTaskButton dateSelected={dateSelectedFormats.complete} />
+      <AddTaskButton dateSelected={completeDateFormat} />
     </section>
   );
 }
