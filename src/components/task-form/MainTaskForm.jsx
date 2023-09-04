@@ -5,14 +5,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import DaysSelector from "./DaysSelector";
 import GenreInput from "./GenreInput";
 import { getQueryParams } from "../../utils/getQueryParams";
-import { saveData } from "../../utils/saveData";
 import { findItemInArray } from "../../utils/findItemById";
-import { updateData } from "../../utils/updateData";
+import useTasksContext from "../../hooks/useTasksContext";
 
 function MainTaskForm() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = getQueryParams(location.search, ["date", "task"]);
+
+  const { saveTask, updateTask } = useTasksContext();
 
   let initialForm = {
     title: "",
@@ -51,7 +52,7 @@ function MainTaskForm() {
     if (Object.keys(errors).length === 0) {
       // Lógica que cree la tarea en el localStorage.
       if (!isEditForm) {
-        saveData("userTasks", {
+        saveTask({
           title: form.title,
           hour: form.hour,
           description: form.description,
@@ -64,7 +65,7 @@ function MainTaskForm() {
 
       // Lógica para actualizar la tarea.
       if (isEditForm) {
-        updateData("userTasks", params.task, {
+        updateTask(params.task, {
           id: initialForm.id,
           title: form.title,
           hour: form.hour,
