@@ -7,7 +7,7 @@ import { TasksContext } from "../contexts/TasksContext";
  *   tasks: Array<Object>,
  *   saveTask: (task: Object) => void,
  *   updateTask: (taskId: string, newData: Object) => void,
- *   deleteTask: (idToRemove: String, array: Array, localStorageArrayName: String ) => void,
+ *   deleteTask: (idToRemove: String) => void,
  *   getDateTasks: () => Array<Object>
  * }} Retorna un objeto con métodos para ver, modificar, eliminar y crear tareas.
  */

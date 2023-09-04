@@ -1,18 +1,19 @@
 import React from "react";
-import { deleteItemById } from "../utils/deleteItemById";
 import { useNavigate } from "react-router-dom";
+import useTasksContext from "../hooks/useTasksContext";
 
 const AlertComponent = ({
   idToRemove,
   message,
-  array,
   setShowAlert,
   urlToRedirect,
 }) => {
   const navigate = useNavigate();
 
-  function deleteItem(id, itemList) {
-    deleteItemById(id, itemList, "userTasks");
+  const { deleteTask } = useTasksContext();
+
+  function deleteItem(idToDelete) {
+    deleteTask(idToDelete);
     setShowAlert(false);
     navigate(urlToRedirect);
   }
@@ -33,7 +34,7 @@ const AlertComponent = ({
         <div className="row justify-content-evenly">
           <button
             className="btn btn-1 col-5"
-            onClick={() => deleteItem(idToRemove, array)}
+            onClick={() => deleteItem(idToRemove)}
           >
             Borrar
           </button>

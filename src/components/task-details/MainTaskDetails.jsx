@@ -4,6 +4,7 @@ import { getQueryParams } from "../../utils/getQueryParams";
 import RepeatInfo from "./RepeatInfo";
 import ButtonsDeleteEdit from "./ButtonsDeleteEdit";
 import ConfirmDelete from "../ConfirmDelete";
+import useTasksContext from "../../hooks/useTasksContext";
 
 function MainTaskDetail() {
   const [showAlert, setShowAlert] = useState(false);
@@ -11,10 +12,11 @@ function MainTaskDetail() {
   const location = useLocation();
   const { task: taskId } = getQueryParams(location.search, "task");
 
-  let task = false;
-  if (localStorage.getItem("userTasks")) {
-    const taskList = JSON.parse(localStorage.getItem("userTasks"));
-    task = taskList.find((task) => task.id === taskId);
+  const { tasks } = useTasksContext();
+
+  let taskSelected = false;
+  if (tasks) {
+    taskSelected = tasks.find((task) => task.id === taskId);
   }
 
   return (
@@ -23,10 +25,9 @@ function MainTaskDetail() {
       {showAlert && (
         <ConfirmDelete
           urlToRedirect={"/"}
-          array={JSON.parse(localStorage.getItem("userTasks"))}
-          idToRemove={task.id}
+          idToRemove={taskSelected.id}
           setShowAlert={setShowAlert}
-          message={`¿Seguro que quiere borrar "${task.title}"?`}
+          message={`¿Seguro que quiere borrar "${taskSelected.title}"?`}
         />
       )}
 
@@ -36,28 +37,28 @@ function MainTaskDetail() {
       >
         <i className="fa-solid fa-chevron-left fs-5 mt-4"></i>
       </Link>
-      {task && (
+      {taskSelected && (
         <div>
-          <h2 className="fs-1 pt-2 mb-0 text-center">{task.title}</h2>
-          <p className="text-center">{task.genre}</p>
+          <h2 className="fs-1 pt-2 mb-0 text-center">{taskSelected.title}</h2>
+          <p className="text-center">{taskSelected.genre}</p>
 
-          <p className="pt-3">{task.description}</p>
+          <p className="pt-3">{taskSelected.description}</p>
 
           <p className="mt-4">
             Horario:
-            {task.allDay ? (
+            {taskSelected.allDay ? (
               <span className="d-block fs-1">Todo el día</span>
             ) : (
               <span className="fs-xxl task_hour_text d-block lh-1">
-                {task.hour}
+                {taskSelected.hour}
               </span>
             )}
           </p>
 
-          <RepeatInfo task={task} />
+          <RepeatInfo task={taskSelected} />
 
           {/* botones para editar y borrar */}
-          <ButtonsDeleteEdit task={task} setShowAlert={setShowAlert} />
+          <ButtonsDeleteEdit task={taskSelected} setShowAlert={setShowAlert} />
         </div>
       )}
     </section>
