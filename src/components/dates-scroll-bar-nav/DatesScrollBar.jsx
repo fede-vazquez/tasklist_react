@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import DateInScrollBar from "./DateInScrollBar";
-
 import dayjs from "dayjs";
 import "dayjs/locale/es";
-import useDayContext from "../hooks/useDayContext";
+
+import useDayContext from "../../hooks/useDayContext";
 dayjs.locale("es");
 
+/** Componente que contiene la barra de navegación horizontal de los días del més. */
 function DatesScrollBar() {
   const containerListRef = useRef();
 
@@ -32,10 +33,6 @@ function DatesScrollBar() {
     oneDay = oneDay.add(1, "day");
   }
 
-  function selectNewDate(newDateSelected) {
-    updateDate(newDateSelected);
-  }
-
   return (
     <div className="px-2">
       <ul
@@ -47,7 +44,7 @@ function DatesScrollBar() {
         <li
           role="button"
           onClick={() => {
-            selectNewDate(
+            updateDate(
               dayjs().month(dateSelectedFormats.monthNumber).startOf("month")
             );
           }}
@@ -71,7 +68,7 @@ function DatesScrollBar() {
               <DateInScrollBar
                 containerListRef={containerListRef}
                 date={date}
-                newDate={selectNewDate}
+                newDate={updateDate}
               />
             </li>
           );
@@ -80,7 +77,7 @@ function DatesScrollBar() {
         <li
           role="button"
           onClick={() => {
-            selectNewDate(
+            updateDate(
               dayjs()
                 .month(dateSelectedFormats.monthNumber + 1)
                 .startOf("month")

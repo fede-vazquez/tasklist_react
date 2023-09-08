@@ -1,19 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { getOffSet, scrollToActiveItemX } from "../utils/centerItemsInList";
+import React, { useEffect } from "react";
+import { getOffSet, scrollToActiveItemX } from "../../utils/centerItemsInList";
+import CompleteTasksDate from "./CompleteTasksDateDetail";
 
 function DateInScrollBar({ date, newDate }) {
   const dateAbbreviation = date.format("ddd");
   const dateNumber = date.format("D");
-
-  const thisItemListRef = useRef();
 
   function selectItem() {
     setTimeout(() => {
       scrollToActiveItemX(
         ".active-date-item",
         "dates-list",
-        getOffSet("#dates-list", ".active-date-item"),
-        ".active-date-item"
+        getOffSet("#dates-list", ".active-date-item")
       );
     }, 10);
 
@@ -22,27 +20,27 @@ function DateInScrollBar({ date, newDate }) {
   }
 
   useEffect(() => {
-    if (
-      thisItemListRef.current.parentNode.classList.contains("active-date-item")
-    ) {
-      setTimeout(() => {
-        scrollToActiveItemX(
-          ".active-date-item",
-          "dates-list",
-          getOffSet("#dates-list", ".active-date-item")
-        );
-      }, 10);
-    }
+    setTimeout(() => {
+      scrollToActiveItemX(
+        ".active-date-item",
+        "dates-list",
+        getOffSet("#dates-list", ".active-date-item")
+      );
+    }, 10);
   }, []);
 
   return (
-    <div ref={thisItemListRef} className="position-relative text-center h-100">
-      <div className="px-4 h-100 d-flex justify-content-center flex-column">
+    <div className="position-relative text-center h-100">
+      <div className="px-4 h-100 d-flex justify-content-center align-items-center flex-column">
         <p className="fs-7">{dateAbbreviation}</p>
         <p className="fs-4">{dateNumber}</p>
+
         {/* proximo icono que mostrará si un día
         tiene tareas para hacer */}
-        <i className="fa-solid fa-circle-check fs-6"></i>
+        <CompleteTasksDate
+          weekDayNumber={date.day()}
+          dateSelected={date.format("DD/MM/YYYY")}
+        />
       </div>
       <div
         onClick={selectItem}
