@@ -5,9 +5,13 @@ import useDayContext from "../../hooks/useDayContext";
 
 /** Componente que carga la lista de tareas del día seleccionado.*/
 function DateTaskList() {
-  const { complete: dateCompleteFormat } = useDayContext().dateSelectedFormats;
+  const { complete: dateCompleteFormat, weekDayNumber } =
+    useDayContext().dateSelectedFormats;
 
-  const dateTasks = useTasksContext().getDateTasks();
+  const dateTasks = useTasksContext().getDateTasks(
+    weekDayNumber,
+    dateCompleteFormat
+  );
 
   return (
     <div
@@ -16,6 +20,7 @@ function DateTaskList() {
     >
       {dateTasks.length !== 0 ? (
         <TaskList
+          weekDayNumber={weekDayNumber}
           dateTasks={dateTasks}
           dateCompleteFormat={dateCompleteFormat}
         />

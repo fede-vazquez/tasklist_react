@@ -1,6 +1,6 @@
 import React from "react";
 import DateTasksList from "./task-list/DateTasks";
-import DatesScrollBar from "./DatesScrollBar";
+import DatesScrollBar from "./dates-scroll-bar-nav/DatesScrollBar";
 import SelectMonth from "./SelectMonth";
 import SelectedDate from "./SelectedDate";
 import dayjs from "dayjs";

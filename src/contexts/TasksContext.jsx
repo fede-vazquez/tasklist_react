@@ -29,7 +29,6 @@ function TasksContextProvider({ children }) {
     : false;
 
   const [tasksInState, setTasksInState] = useState(tasksInStorage);
-
   function saveTask(newTask) {
     saveData("userTasks", newTask);
     setTasksInState(JSON.parse(localStorage.userTasks));
@@ -45,7 +44,7 @@ function TasksContextProvider({ children }) {
     setTasksInState(JSON.parse(localStorage.userTasks));
   }
 
-  function getDateTasks() {
+  function getDateTasks(weekDayNumber, dateSelected) {
     return filterDateTasksList(tasksInState, weekDayNumber, dateSelected);
   }
 
