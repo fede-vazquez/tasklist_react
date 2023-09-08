@@ -1,47 +1,24 @@
 import React from "react";
 
-import { saveData } from "../../utils/saveData";
-import { deleteItemById } from "../../utils/deleteItemById";
+import useCompleteTasksContext from "../../hooks/useCompleteTasksContext";
 
-function ButtonCompleteTask({
-  task,
-  setCompleteTasks,
-  completeTasks,
-  isComplete,
-  dateCompleteFormat,
-}) {
-  // Función principal que maneja la activación o desactivación de un check.
+/**
+ * Botón para marcar como completa o incompleta una tarea.
+ * @param {String} taskId : Id de la tarea.
+ * @param {String} dateCompleteFormat : Formato "DD/MM/YYYY" del día que sea la tarea.
+ * @param {Number} weekDayNumber : Numero del día en la semana.
+ */
+function ButtonCompleteTask({ taskId, dateCompleteFormat, weekDayNumber }) {
+  const { addCompleteTask, removeCompleteTask, isComplete } =
+    useCompleteTasksContext();
+
+  const isTaskComplete = isComplete(taskId, dateCompleteFormat, weekDayNumber);
+
   function handleChecked(taskId) {
-    if (!isComplete) {
-      saveCompleteTask(taskId);
+    if (!isTaskComplete) {
+      addCompleteTask(taskId, dateCompleteFormat);
     } else {
-      removeCompleteTask(taskId);
-    }
-
-    // Guarda en el estado el nuevo array del localStorage.
-    setCompleteTasks(JSON.parse(localStorage.completeTasks));
-  }
-
-  // Guarda la tarea completa en el localStorage
-  function saveCompleteTask(taskId) {
-    const dataToSave = {
-      taskId: taskId,
-      date: dateCompleteFormat,
-    };
-    saveData("completeTasks", dataToSave);
-  }
-
-  // Elimina la tarea completa del localStorage
-  function removeCompleteTask(taskId) {
-    if (completeTasks?.length >= 1) {
-      const taskCompleteToRemove = completeTasks.find((taskComplete) => {
-        return (
-          taskComplete.taskId === taskId &&
-          taskComplete.date === dateCompleteFormat
-        );
-      });
-
-      deleteItemById(taskCompleteToRemove.id, completeTasks, "completeTasks");
+      removeCompleteTask(taskId, dateCompleteFormat);
     }
   }
 
@@ -49,13 +26,13 @@ function ButtonCompleteTask({
     <div
       role="button"
       className={`rounded-5 position-relative circle-checkbox d-flex justify-content-center align-items-center fw-bold
-      ${isComplete ? " circle-checkbox-active" : ""}`}
+      ${isTaskComplete ? " circle-checkbox-active" : ""}`}
     >
       <i className="fa-solid fa-check"></i>
       <div
         className="position-absolute w-100 h-100"
         onClick={() => {
-          handleChecked(task.id);
+          handleChecked(taskId);
         }}
       ></div>
     </div>
