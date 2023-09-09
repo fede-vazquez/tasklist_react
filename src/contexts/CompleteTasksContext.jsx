@@ -6,10 +6,11 @@ import { deleteItemById } from "../utils/deleteItemById";
 /**
  * Contexto de las tareas completas del usuario.
  * @property {function} addCompleteTask - Marca como completa una tarea.
- * @property {function} removeCompleteTask - Marca como incompleta una tarea.
+ * @property {function} removeCompleteTask - Elimina la tarea completa del localStorage.
  * @property {function} isComplete - Devuelve un booleano que dice si la tarea esta completa o no.
  * @property {function} allTasksDateComplete - Devuelve un booleano dependiendo si se completaron todas las tareas de un día.
  * @property {function} getDateCompleteTasks - Devuelve un array con todas las tareas completas de un día.
+ * @property {function} multipleRemoveCompleteTask - Elimina todas las tareas completas enlazadas con una tarea, en caso de eliminar una.
  *
  * Para una fácil implementación de este contexto, existe un hook
  * que agrega más información de como utilizar cada función.
@@ -22,7 +23,7 @@ const CompleteTasksContext = createContext();
 function CompleteTaskContextProvider({ children }) {
   const completeTasksInStorage = localStorage.completeTasks
     ? JSON.parse(localStorage.completeTasks)
-    : false;
+    : [];
 
   const [completeTasksInState, setCompleteTasksInState] = useState(
     completeTasksInStorage
@@ -71,7 +72,7 @@ function CompleteTaskContextProvider({ children }) {
   }
 
   function removeCompleteTask(taskId, date) {
-    if (completeTasksInState?.length >= 1) {
+    if (completeTasksInState.length >= 1) {
       const taskCompleteToRemove = completeTasksInState.find((taskComplete) => {
         return taskComplete.taskId === taskId && taskComplete.date === date;
       });
@@ -85,6 +86,18 @@ function CompleteTaskContextProvider({ children }) {
     }
   }
 
+  function multipleRemoveCompleteTask(taskId) {
+    if (completeTasksInState.length >= 1) {
+      const filterCompleteTasks = completeTasksInState.filter(
+        (taskComplete) => {
+          return taskComplete.taskId !== taskId;
+        }
+      );
+      setCompleteTasksInState(filterCompleteTasks);
+      localStorage.setItem("completeTasks", filterCompleteTasks);
+    }
+  }
+
   return (
     <CompleteTasksContext.Provider
       value={{
@@ -93,6 +106,7 @@ function CompleteTaskContextProvider({ children }) {
         removeCompleteTask,
         isComplete,
         allTasksDateComplete,
+        multipleRemoveCompleteTask,
       }}
     >
       {children}
@@ -100,12 +114,13 @@ function CompleteTaskContextProvider({ children }) {
   );
 }
 
-function dateCompleteTasks(dateSelectedTasks, completeTasks) {
-  // Ver si hay tareas completas de ese día y filtrarlas..
-
+function dateCompleteTasks(dateSelectedTasks, completeTasks, dateSelected) {
+  // Ver si hay tareas completas de ese día y filtrarlas.
   const completeDateTasks = completeTasks.filter((completeTask) => {
     const taskComplete = dateSelectedTasks.find((task) => {
-      return completeTask.taskId === task.id && completeTask.date === task.date;
+      return (
+        completeTask.taskId === task.id && completeTask.date === dateSelected
+      );
     });
 
     return taskComplete;

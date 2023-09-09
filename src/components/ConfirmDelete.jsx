@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useTasksContext from "../hooks/useTasksContext";
+import useCompleteTasksContext from "../hooks/useCompleteTasksContext";
 
 const AlertComponent = ({
   idToRemove,
@@ -12,8 +13,11 @@ const AlertComponent = ({
 
   const { deleteTask } = useTasksContext();
 
+  const { multipleRemoveCompleteTask } = useCompleteTasksContext();
+
   function deleteItem(idToDelete) {
     deleteTask(idToDelete);
+    multipleRemoveCompleteTask(idToDelete);
     setShowAlert(false);
     navigate(urlToRedirect);
   }
